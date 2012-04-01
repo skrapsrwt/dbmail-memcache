@@ -1,0 +1,50 @@
+Description: update dbmail.conf for debian policy
+Author: Paul J Stevens <paul@nfg.nl>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- a/dbmail.conf
++++ b/dbmail.conf
+@@ -135,8 +135,8 @@ query_timeout         = 300
+ # Root privs are used to open a port, then privs
+ # are dropped down to the user/group specified here.
+ #
+-effective_user        = nobody
+-effective_group       = nogroup
++effective_user        = dbmail
++effective_group       = dbmail
+ 
+ # 
+ # The IPv4 and/or IPv6 addresses the services will bind to.
+@@ -173,17 +173,17 @@ authlog               = no
+ # 
+ # logfile for stdout messages
+ #
+-logfile               = /var/log/dbmail.log        
++logfile               = /var/log/dbmail/dbmail.log        
+ 
+ # 
+ # logfile for stderr messages
+ #
+-errorlog              = /var/log/dbmail.err        
++errorlog              = /var/log/dbmail/dbmail.err        
+ 
+ # 
+ # directory for storing PID files
+ #
+-pid_directory         = /var/run
++pid_directory         = /var/run/dbmail
+ 
+ #
+ # directory for locating libraries (normally has a sane default compiled-in)

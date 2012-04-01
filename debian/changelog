@@ -1,0 +1,243 @@
+dbmail (3.0.2-1) oneiric; urgency=low
+
+  * upstream release
+
+ -- Paul J Stevens <paul@nfg.nl>  Sun, 11 Mar 2012 09:01:44 +0100
+
+dbmail (3.0.1-1) unstable; urgency=low
+
+  * upstream release
+
+ -- Paul J Stevens <paul@nfg.nl>  Wed, 22 Feb 2012 13:51:01 +0100
+
+dbmail (2.3.6-1) experimental; urgency=low
+
+  * upstream release
+
+ -- Paul J Stevens <paul@nfg.nl>  Sun, 28 Jun 2009 15:47:33 +0200
+
+dbmail (2.3.5-1) experimental; urgency=low
+
+  * upstream release
+
+ -- Paul Stevens <paul@nfg.nl>  Tue, 06 Jan 2009 12:51:28 +0100
+
+dbmail (2.3.2-1) experimental; urgency=low
+
+  * upstream release
+
+ -- Paul J Stevens <paul@nfg.nl>  Mon,  4 Feb 2008 15:37:28 +0100
+
+dbmail (2.2.8-1) unstable; urgency=low
+
+  * upstream release
+
+ -- Paul J Stevens <paul@nfg.nl>  Wed, 12 Dec 2007 14:11:56 +0100
+
+dbmail (2.2.7-1) unstable; urgency=low
+
+  * upstream release
+
+ -- Paul J Stevens <paul@nfg.nl>  Sat, 27 Oct 2007 10:39:37 +0200
+
+dbmail (2.2.6-2) unstable; urgency=low
+
+  * fix a critical regression in 2.2.6-1
+
+ -- Paul J Stevens <paul@nfg.nl>  Tue, 18 Sep 2007 11:24:04 +0200
+
+dbmail (2.2.6-1) unstable; urgency=low
+
+  * new upstream release (Closes: #421018)
+  * update postinst and postrm (Closes: #427895, #427896)
+
+ -- Paul J Stevens <paul@nfg.nl>  Sat, 15 Sep 2007 10:42:41 +0200
+
+dbmail (2.2.5-1) unstable; urgency=low
+
+  * new upstream release (Closes: #412741, #415958, #423832)
+  * update postinst (Closes: #418582)
+
+ -- Paul J Stevens <paul@nfg.nl>  Tue, 15 May 2007 13:47:50 +0200
+
+dbmail (2.2.4-1) unstable; urgency=low
+
+  * 2.2.4 release
+
+ -- Paul J Stevens <paul@nfg.nl>  Sun, 11 Mar 2007 21:54:37 +0100
+
+dbmail (2.2.3-1) unstable; urgency=low
+
+  [ Paul J Stevens ]  
+  * remove configure code from postinst, leaving the driver alone.
+  * new upstream release.
+
+  [ Christian Perrier   ]
+  * Rewrite debconf templates for style consistency. Closes: #412276
+  * Debconf translations:
+    - French
+    - Czech. Closes: #412290
+    - Galician. Closes: #412336
+    - Tamil. Closes: #412442, #412439
+    - Russian. Closes: #412539
+    - Malayalam. Closes: #412849
+    - Spanish
+    - Italian
+    - Dutch
+    - Portuguese. Closes: #412942
+
+ -- Christian Perrier <bubulle@debian.org>  Thu,  1 Mar 2007 07:15:49 +0100
+
+dbmail (2.2.1-1) unstable; urgency=low
+
+  * new upstream release (closes: #351341)
+  * Provide a common package (closes: #236406).
+  * Fixes sql insertion vulnerabilities (closes: #290833, #303991).
+  * Stop services in prerm (closes: #256236).
+  * Find postgresql headers during build (closes: #315404).
+  * Don't rely on ucf when purging (closes: #334438).
+  * Fix problem in stunnel startup (closes: #288956).
+  * Correctly install init scripts (Closes: #235026)
+  * Fixes build failures (Closes: #284770, #376381).
+  * Add debconf-2.0 alternate (Closes: #331793).
+  * Update MySQL dependency (Closes: #358832).
+  * Add debconf translations (Closes: #310183, #308204, #310182, #336044).
+  * Make init script lsb compliant.
+  * Build-depends on automake1.9 instead of automaken (Closes: #380713).
+
+ -- Paul J Stevens <paul@nfg.nl>  Sat, 18 Nov 2006 17:04:56 +0100
+
+dbmail (1.2.11-1) unstable; urgency=low
+
+  * new upstream release
+  * fixed stunnel startup (closes: #255952).
+  * added japanese debconf translation (closes: #281153).
+
+ -- Paul J Stevens <paul@nfg.nl>  Tue, 16 Nov 2004 14:27:47 +0100
+
+dbmail (1.2.10-1) unstable; urgency=low
+
+  * new upstream release. Minor compatibility fix for mysql-4.1 
+
+ -- Paul J Stevens <paul@nfg.nl>  Wed, 22 Sep 2004 12:32:59 +0200
+
+dbmail (1.2.9-1) unstable; urgency=low
+
+  * new upstream release. Fixes long-standing Return-Path problem.
+
+ -- Paul J Stevens <paul@nfg.nl>  Tue,  3 Aug 2004 14:03:15 +0200
+
+dbmail (1.2.8b-2) unstable; urgency=low
+
+  * minor fix in exim4 documentation.
+  * force stunnel to store pids in /var/run/
+  * updated dutch po-debconf translation (closes: #253454).
+
+ -- Paul J Stevens <paul@nfg.nl>  Mon,  2 Aug 2004 10:44:49 +0200
+
+dbmail (1.2.8b-1.1) unstable; urgency=low
+
+  * NMU during BSP.
+  * prerm script added (closes: 256236).
+
+ -- Sebastian Muszynski <do2ksm@linkt.de>  Sun, 18 Jul 2004 14:49:33 +0200
+
+dbmail (1.2.8b-1) unstable; urgency=medium
+
+  * new upstream release. Fixes pop3 crash.
+
+ -- Paul J Stevens <paul@nfg.nl>  Wed, 16 Jun 2004 19:35:11 +0200
+
+dbmail (1.2.8a-1) unstable; urgency=high
+
+  * new upstream release. Buffer-overflow fix.
+
+ -- Paul J Stevens <paul@nfg.nl>  Wed,  9 Jun 2004 09:00:51 +0200
+
+dbmail (1.2.8-1) unstable; urgency=low
+
+  * new upstream release.
+  * added german translation of debconf stuff (closes: #252163).
+
+ -- Paul J Stevens <paul@nfg.nl>  Sun,  6 Jun 2004 13:40:06 +0200
+
+dbmail (1.2.7b-1) unstable; urgency=low
+
+  * new upstream release. Bugfix release.
+
+ -- Paul J Stevens <paul@nfg.nl>  Fri,  7 May 2004 11:16:33 +0200
+
+dbmail (1.2.6-1) unstable; urgency=high
+
+  * new upstream release. Fixes DoS vulnerability.
+
+ -- Paul J Stevens <paul@nfg.nl>  Thu, 22 Apr 2004 09:21:10 +0200
+
+dbmail (1.2.5-1) unstable; urgency=low
+
+  * new upstream release. Bugfix release.
+  * add build-dep for groff (closes: #237234).
+  * fix typo in postrm (closes: #237937).
+  
+ -- Paul J Stevens <paul@nfg.nl>  Thu, 25 Mar 2004 12:52:06 +0100
+
+dbmail (1.2.4-1) unstable; urgency=low
+
+  * new upstream release. Bugfix release.
+  * fixed the botched ucf fix.
+  * move man pages to correct section (closes: #235255).
+  * included exim4/postfix howto provided by Dan Weber
+    <dan@mirrorlynx.com> (closes: #235254).
+
+ -- Paul J Stevens <paul@nfg.nl>  Tue,  9 Mar 2004 09:08:55 +0100
+
+dbmail (1.2.3-2) unstable; urgency=low
+
+  * moved /etc/dbmail/dbmail-debian.conf to /etc/default/dbmail
+    fixing a debian policy violation (closes: #231527).
+  * depend on ucf 0.30 and fixed postinst accordingly.
+
+ -- Paul J Stevens <paul@nfg.nl>  Wed, 25 Feb 2004 21:55:03 +0100
+
+dbmail (1.2.3-1) unstable; urgency=low
+
+  * new upstream release. Bugfix release.
+  * updated the README.Debian.
+  * fixed some build dependencies.
+  * fixed the Conflicts and Suggests lines.
+
+ -- Paul J Stevens <paul@nfg.nl>  Thu, 29 Jan 2004 10:42:41 +0100
+
+dbmail (1.2.1-2) unstable; urgency=low
+
+  * added pt_BR translation (closes: #218811).
+  * re-added missing documentation, i.e. README.Debian.
+  * removed an additional bashism (closes: #217828).
+
+ -- Paul J Stevens <paul@nfg.nl>  Tue,  9 Dec 2003 14:19:58 +0100
+
+dbmail (1.2.1-1) unstable; urgency=low
+
+  * new upstream release. Fixes security hole in pipe.c.
+  * remove dpkg-statoverride call from postinst.
+  * fixed several bashisms.
+
+ -- Paul J Stevens <paul@nfg.nl>  Mon, 27 Oct 2003 20:04:40 +0100
+
+dbmail (1.2-1) unstable; urgency=low
+
+  * new upstream release.
+  * fixed minor typos in templates (closes: #213793).
+  * fixed binary-arch target in rules (closes: #212503).
+  * applied patch to fix reuseraddr socket option. This should fix
+    the restart problems as seen with connected clients.
+
+ -- Paul J Stevens <paul@nfg.nl>  Thu, 16 Oct 2003 10:26:34 +0200
+
+dbmail (1.1-1) unstable; urgency=low
+
+  * initial upload (closes: #179879).
+  * Sponsored by Francesco P. Lovergine <frankie@debian.org>
+  * provides italian and dutch translations of debconf templates.
+
+ -- Paul J Stevens <paul@nfg.nl>  Wed, 10 Sep 2003 10:05:52 +0200

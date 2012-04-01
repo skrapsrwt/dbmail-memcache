@@ -1,0 +1,11 @@
+AUTHORS
+THANKS
+README
+doc/README.exim
+doc/README.postfix
+doc/README.qmail
+doc/README.aliases
+doc/README.smtp
+doc/README.usermap
+doc/README.ldap
+doc/README.sieve

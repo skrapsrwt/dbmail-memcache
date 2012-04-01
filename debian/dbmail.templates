@@ -1,0 +1,121 @@
+Template: dbmail/do_debconf
+Type: boolean
+_Description: Use debconf to manage dbmail configuration?
+ Please confirm if you want to allow debconf to manage some parts of your
+ dbmail configuration. Notice that changes you make to dbmail.conf by hand
+ will NOT be overwritten should you later choose to re-run dpkg-reconfigure
+ dbmail.
+
+Template: dbmail/dbmail/authdriver
+Type: select
+Choices: sql, ldap
+Default: sql
+_Description: Authentication driver to activate:
+ Dbmail by default uses SQL based authentication. But you can also use
+ LDAP instead.
+
+Template: dbmail/dbmail/postmaster
+Type: string
+_Description: Postmaster's email address:
+ Please choose a valid email address read by the person responsible for
+ this email server.
+ .
+ Example: postmaster@yourdomain.tld
+
+Template: dbmail/dbmail/host
+Type: string
+_Description: Hostname of the SQL database server:
+ Please mention the server where a database to hold dbmail's tables
+ will be created. You should grant full read/write permissions on this
+ database to the dbmail user.
+
+Template: dbmail/dbmail/db
+Type: string
+_Description: The name of the database:
+ Please mention the name of the database that holds the dbmail tables.
+ .
+ If you're using sqlite, this should be the path to the database file.
+
+Template: dbmail/dbmail/user
+Type: string
+_Description: Database user:
+ Please mention the username dbmail will use to connect to the database server.
+
+Template: dbmail/dbmail/pass
+Type: password
+_Description: Password for the database connection:
+ Please mention the password dbmail will use to connect to the database server.
+
+Template: dbmail/start_imapd
+Type: boolean
+_Description: Start the IMAP server after reboot?
+ Dbmail supports both IMAP and POP3 services. You can choose to run either
+ one or both services.
+
+Template: dbmail/start_lmtpd
+Type: boolean
+_Description: Start the LMTP server after reboot?
+ Please choose whether the LMTP server should be started after
+ rebooting. This is only needed when you like to feed the email to
+ Dbmail by LMTP.
+
+Template: dbmail/start_pop3d
+Type: boolean
+_Description: Start the POP3 server after reboot?
+ Dbmail supports both IMAP and POP3 services. You can choose to run either
+ one or both services.
+
+Template: dbmail/start_sieve
+Type: boolean
+_Description: Start the timsieve server after reboot?
+ Please choose whether the timsieve server should be started after
+ rebooting. This is only needed if you want to allow users to manage
+ their sieve scripts using a compatible client such as kmail,
+ horde/ingo or squirrelmail/avelsieve.
+
+Template: dbmail/ldap/port
+Type: string
+_Description: Port used by the LDAP server:
+ Please enter the port which your LDAP server is listening on.
+ The default port is 389.
+
+Template: dbmail/ldap/hostname
+Type: string
+_Description: Hostname of the LDAP server:
+ Please enter the name of the host your LDAP server is running at.
+
+Template: dbmail/ldap/base_dn
+Type: string
+_Description: LDAP base DN:
+ Please enter the DN where Dbmail should start searching for
+ user accounts.
+
+Template: dbmail/ldap/field_uid
+Type: string
+_Description: Field which contains the user login name of the user:
+ Please enter the LDAP attribute that will contain the username.
+ The standard account uses uid.
+
+Template: dbmail/ldap/field_cid
+Type: string
+_Description: Field which contains the group id number of the user:
+ Please enter the LDAP attribute that will contain the group id number.
+ The standard account uses gidNumber.
+
+Template: dbmail/ldap/bind_anonymous
+Type: boolean
+_Description: Use an anonymous connection to the LDAP server?
+ Please choose this option if the LDAP server does not require
+ authentication to search the LDAP tree.
+
+Template: dbmail/ldap/bind_dn
+Type: string
+_Description: DN used to bind to the LDAP server:
+ Please enter the DN which should be used to connect to the LDAP
+ server.
+
+Template: dbmail/ldap/bind_pw
+Type: password
+_Description: Password to bind to the LDAP server:
+ Please enter the password which should be used to connect to the LDAP
+ server.

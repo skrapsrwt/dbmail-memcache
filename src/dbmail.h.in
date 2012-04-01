@@ -1,0 +1,258 @@
+/*
+ Copyright (C) 1999-2004 IC & S, dbmail@ic-s.nl
+ Copyright (C) 2001-2007 Aaron Stone, aaron@serendipity.cx
+ Copyright (C) 2004-2011 NFG Net Facilities Group BV, support@nfg.nl
+
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License as
+ published by the Free Software Foundation; either version 2 of
+ the License, or (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+*/
+
+/**
+ * \file dbmail.h
+ * header file for a general configuration
+ */
+
+#ifndef _DBMAIL_H
+#define _DBMAIL_H
+
+#ifdef HAVE_CONFIG_H
+#include "config.h"
+#endif
+
+#define __EXTENSIONS__ /* solaris */
+
+#if defined(__FreeBSD__) || defined(__APPLE__) || defined(__SUNPRO_C)
+
+#define _XOPEN_SOURCE
+
+#else
+
+#define _XOPEN_SOURCE	500
+#include <features.h>
+
+#endif
+
+
+#include <assert.h>
+#include <arpa/inet.h>
+#include <ctype.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <fnmatch.h>
+#include <gmime/gmime.h>
+#include <glib.h>
+#include <gmodule.h>
+#include <grp.h>
+#include <limits.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <pwd.h>
+#include <signal.h>
+#include <syslog.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <strings.h>
+#include <sysexits.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <sys/socket.h>
+#include <sys/un.h>
+#include <sys/time.h>
+#include <sys/wait.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/utsname.h>
+#include <time.h>
+#include <termios.h>
+#include <unistd.h>
+#include <mhash.h>
+#include <sys/queue.h>
+#include <evhttp.h>
+#include <math.h>
+#include <openssl/ssl.h>
+
+#ifdef AUTHLDAP
+#define LDAP_DEPRECATED 1
+#include <ldap.h>
+#endif
+
+#include <URL.h>
+#include <ResultSet.h>
+#include <PreparedStatement.h>
+#include <Connection.h>
+#include <ConnectionPool.h>
+#include <SQLException.h>
+
+#include "dm_cram.h"
+#include "dm_capa.h"
+#include "dbmailtypes.h"
+#include "dm_config.h"
+#include "dm_list.h"
+#include "dm_debug.h"
+#include "dm_dsn.h"
+#include "dm_acl.h"
+#include "dm_misc.h"
+#include "dm_quota.h"
+#include "dm_tls.h"
+
+#include "dbmail-user.h"
+#include "dbmail-mailbox.h"
+#include "dbmail-message.h"
+#include "dbmail-imapsession.h"
+
+#include "imapcommands.h"
+#include "server.h"
+#include "clientsession.h"
+#include "clientbase.h"
+#include "lmtp.h"
+
+#include "dm_db.h"
+#include "dm_sievescript.h"
+
+#include "auth.h"
+#include "authmodule.h"
+
+#include "sort.h"
+#include "sortmodule.h"
+
+#include "dm_digest.h"
+#include "dm_cidr.h"
+#include "dm_iconv.h"
+#include "dm_getopt.h"
+#include "dm_match.h"
+#include "dm_sset.h"
+
+#ifdef SIEVE
+#include <sieve2.h>
+#include <sieve2_error.h>
+#endif
+
+
+#ifdef HAVE_CRYPT_H
+#include <crypt.h>
+#endif
+
+#ifdef HAVE_ENDIAN_H
+#include <endian.h>
+#endif
+
+#define GETCONFIGVALUE(key, sect, var) \
+	config_get_value(key, sect, var); \
+	if (strlen(var) > 0) \
+		TRACE(TRACE_DEBUG, "key "#key" section "#sect" var "#var" value [%s]", var)
+	/* No final ';' so macro can be called "like a function" */
+
+#define CONFIG_ERROR_LEVEL TRACE_WARNING
+
+#define PRINTF_THIS_IS_DBMAIL printf("This is DBMail version %s\n\n%s\n", VERSION, COPYRIGHT)
+
+#define COPYRIGHT \
+"Copyright (C) 1999-2004 IC & S, dbmail@ic-s.nl\n" \
+"Copyright (C) 2001-2007 Aaron Stone, aaron@serendipity.cx\n" \
+"Copyright (C) 2004-2011 NFG Net Facilities Group BV, support@nfg.nl\n" \
+"\n" \
+"Please see the AUTHORS and THANKS files for additional contributors.\n" \
+"\n" \
+"This program is free software; you can redistribute it and/or \n" \
+"modify it under the terms of the GNU General Public License as\n" \
+"published by the Free Software Foundation; either version 2 of\n" \
+"the License, or (at your option) any later version.\n" \
+"\n" \
+"This program is distributed in the hope that it will be useful,\n" \
+"but WITHOUT ANY WARRANTY; without even the implied warranty of\n" \
+"MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n" \
+"GNU General Public License for more details.\n" \
+"\n" \
+"You should have received a copy of the GNU General Public License\n" \
+"along with this program; if not, write to the Free Software\n" \
+"Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.\n" \
+""
+
+/* include sql/sqlite/create_tables.sqlite for autocreation */
+#define DM_SQLITECREATE @SQLITECREATE@
+
+/** default directory and extension for pidfiles */
+#define DEFAULT_PID_DIR "@DM_STATEDIR@"
+#define DEFAULT_PID_EXT ".pid"
+#define DEFAULT_STATE_DIR "@DM_STATEDIR@"
+#define DEFAULT_STATE_EXT ".state"
+
+/** default location of library files */
+#define DEFAULT_LIBRARY_DIR "@DM_PKGLIBDIR@"
+
+/** default configuration file */
+#define DEFAULT_CONFIG_FILE "@DM_CONFDIR@/dbmail.conf"
+
+/** default log files */
+#define DEFAULT_LOG_FILE "@DM_LOGDIR@/dbmail.log"
+#define DEFAULT_ERROR_LOG "@DM_LOGDIR@/dbmail.err"
+
+#define IMAP_CAPABILITY_STRING "IMAP4rev1 AUTH=LOGIN AUTH=CRAM-MD5 ACL RIGHTS=texk NAMESPACE CHILDREN SORT QUOTA THREAD=ORDEREDSUBJECT UNSELECT IDLE STARTTLS ID"
+#define IMAP_TIMEOUT_MSG "* BYE dbmail IMAP4 server signing off due to timeout\r\n"
+/** prefix for #Users namespace */
+#define NAMESPACE_USER "#Users"
+/** prefix for public namespace */
+#define NAMESPACE_PUBLIC "#Public"
+/** seperator for namespaces and mailboxes and submailboxes */
+#define MAILBOX_SEPARATOR "/"
+/** username for owner of public folders */
+// FIXME: Should be #define PUBLIC_FOLDER_USER "__@!internal_public_user!@__"
+#define PUBLIC_FOLDER_USER "__public__"
+/* name of internal delivery user. */
+#define DBMAIL_DELIVERY_USERNAME "__@!internal_delivery_user!@__"
+/* standard user for ACL anyone (see RFC 2086 and 4314) */
+#define DBMAIL_ACL_ANYONE_USER "anyone"
+
+/* Consumers of this should be using POSTMASTER from dbmail.conf! */
+#define DEFAULT_POSTMASTER "DBMAIL-MAILER@dbmail"
+#define AUTO_NOTIFY_SENDER "autonotify@dbmail"
+#define AUTO_NOTIFY_SUBJECT "NEW MAIL NOTIFICATION"
+
+/* input reading linelimit */
+#define MAX_LINESIZE (64*1024)
+
+/* string length for query */
+#define DEF_QUERYSIZE 8192
+#define DEF_FRAGSIZE 64 
+
+/** default table prefix */
+#define DEFAULT_DBPFX "dbmail_"
+
+#define MATCH(x,y) ((x) && (y) && (strcasecmp((x),(y))==0))
+
+#define min(x,y) ((x)<=(y)?(x):(y))
+#define max(x,y) ((x)>=(y)?(x):(y))
+#define ISCR(a) ((char)(a)=='\r')
+#define ISLF(a) ((char)(a)=='\n')
+#define ISDOT(a) ((char)(a)=='.')
+
+#define AUTHLOG_ERR "failed"
+#define AUTHLOG_ACT "active"
+#define AUTHLOG_FIN "closed"
+
+#define LOG_SQLERROR TRACE(TRACE_ERR,"SQLException: %s", Exception_frame.message)
+#define DISPATCH(f,a) \
+	{ \
+		GError *err = NULL; \
+		if (! g_thread_create((GThreadFunc)f, (gpointer)a, FALSE, &err) ) \
+			TRACE(TRACE_DEBUG,"gthread creation failed [%s]", err->message); \
+	}
+
+#define LOCK(a) g_static_rec_mutex_lock(a)
+#define UNLOCK(a) g_static_rec_mutex_unlock(a)
+
+#endif

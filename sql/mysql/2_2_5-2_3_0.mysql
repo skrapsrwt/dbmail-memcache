@@ -1,0 +1,43 @@
+SET FOREIGN_KEY_CHECKS=0;
+
+DROP TABLE IF EXISTS `dbmail_mimeparts`;
+CREATE TABLE `dbmail_mimeparts` (
+  `id`   bigint(21) NOT NULL AUTO_INCREMENT,
+  `hash` char(128) NOT NULL,
+  `data` longblob NOT NULL,
+  `size` bigint(21) NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `hash` (`hash`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `dbmail_partlists`;
+CREATE TABLE `dbmail_partlists` (
+  `physmessage_id` bigint(21) NOT NULL,
+  `is_header` tinyint(1) NOT NULL default '0',
+  `part_key` smallint(6) NOT NULL default '0',
+  `part_depth` smallint(6) NOT NULL default '0',
+  `part_order` smallint(6) NOT NULL default '0',
+  `part_id` bigint(21) NOT NULL,
+  KEY `physmessage_id` (`physmessage_id`),
+  KEY `part_id` (`part_id`),
+  CONSTRAINT `dbmail_partlists_ibfk_1` FOREIGN KEY (`physmessage_id`) REFERENCES `dbmail_physmessage` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `dbmail_partlists_ibfk_2` FOREIGN KEY (`part_id`) REFERENCES `dbmail_mimeparts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS=1;
+
+ALTER TABLE dbmail_mailboxes ADD mtime DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00';
+ALTER TABLE dbmail_mailboxes ADD KEY mtime (mtime);
+ALTER TABLE dbmail_mailboxes CHANGE name name VARCHAR(255) NOT NULL DEFAULT '';
+
+DROP INDEX dbmail_sievescripts_1 ON dbmail_sievescripts;
+CREATE UNIQUE INDEX dbmail_sievescripts_1 ON dbmail_sievescripts(owner_idnr, name);
+
+DROP TABLE IF EXISTS dbmail_keywords;
+CREATE TABLE dbmail_keywords (
+	message_idnr bigint(21) NOT NULL,
+	keyword varchar(64) NOT NULL,
+	PRIMARY KEY  (message_idnr,keyword),
+	CONSTRAINT dbmail_keywords_ibfk_1 FOREIGN KEY (message_idnr) REFERENCES dbmail_messages (message_idnr) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

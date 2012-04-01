@@ -1,0 +1,1263 @@
+dm_http.o: dm_http.c dbmail.h ../config.h /usr/include/features.h \
+ /usr/include/i386-linux-gnu/bits/predefs.h \
+ /usr/include/i386-linux-gnu/sys/cdefs.h \
+ /usr/include/i386-linux-gnu/bits/wordsize.h \
+ /usr/include/i386-linux-gnu/gnu/stubs.h \
+ /usr/include/i386-linux-gnu/gnu/stubs-32.h /usr/include/assert.h \
+ /usr/include/arpa/inet.h /usr/include/netinet/in.h \
+ /usr/lib/gcc/i686-linux-gnu/4.6.1/include/stdint.h /usr/include/stdint.h \
+ /usr/include/i386-linux-gnu/bits/wchar.h \
+ /usr/include/i386-linux-gnu/sys/socket.h \
+ /usr/include/i386-linux-gnu/sys/uio.h \
+ /usr/include/i386-linux-gnu/sys/types.h \
+ /usr/include/i386-linux-gnu/bits/types.h \
+ /usr/include/i386-linux-gnu/bits/typesizes.h /usr/include/time.h \
+ /usr/lib/gcc/i686-linux-gnu/4.6.1/include/stddef.h /usr/include/endian.h \
+ /usr/include/i386-linux-gnu/bits/endian.h \
+ /usr/include/i386-linux-gnu/bits/byteswap.h \
+ /usr/include/i386-linux-gnu/sys/select.h \
+ /usr/include/i386-linux-gnu/bits/select.h \
+ /usr/include/i386-linux-gnu/bits/sigset.h \
+ /usr/include/i386-linux-gnu/bits/time.h \
+ /usr/include/i386-linux-gnu/sys/sysmacros.h \
+ /usr/include/i386-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/i386-linux-gnu/bits/uio.h \
+ /usr/include/i386-linux-gnu/bits/socket.h \
+ /usr/include/i386-linux-gnu/bits/sockaddr.h \
+ /usr/include/i386-linux-gnu/asm/socket.h \
+ /usr/include/asm-generic/socket.h \
+ /usr/include/i386-linux-gnu/asm/sockios.h \
+ /usr/include/asm-generic/sockios.h \
+ /usr/include/i386-linux-gnu/bits/socket2.h \
+ /usr/include/i386-linux-gnu/bits/in.h /usr/include/ctype.h \
+ /usr/include/xlocale.h /usr/include/errno.h \
+ /usr/include/i386-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/i386-linux-gnu/asm/errno.h /usr/include/asm-generic/errno.h \
+ /usr/include/asm-generic/errno-base.h /usr/include/fcntl.h \
+ /usr/include/i386-linux-gnu/bits/fcntl.h \
+ /usr/include/i386-linux-gnu/bits/stat.h \
+ /usr/include/i386-linux-gnu/bits/fcntl2.h /usr/include/fnmatch.h \
+ /usr/include/gmime-2.4/gmime/gmime.h /usr/include/glib-2.0/glib.h \
+ /usr/include/glib-2.0/glib/galloca.h /usr/include/glib-2.0/glib/gtypes.h \
+ /usr/lib/i386-linux-gnu/glib-2.0/include/glibconfig.h \
+ /usr/include/glib-2.0/glib/gmacros.h \
+ /usr/lib/gcc/i686-linux-gnu/4.6.1/include-fixed/limits.h \
+ /usr/lib/gcc/i686-linux-gnu/4.6.1/include-fixed/syslimits.h \
+ /usr/include/limits.h /usr/include/i386-linux-gnu/bits/posix1_lim.h \
+ /usr/include/i386-linux-gnu/bits/local_lim.h /usr/include/linux/limits.h \
+ /usr/include/i386-linux-gnu/bits/posix2_lim.h \
+ /usr/include/i386-linux-gnu/bits/xopen_lim.h \
+ /usr/include/i386-linux-gnu/bits/stdio_lim.h \
+ /usr/lib/gcc/i686-linux-gnu/4.6.1/include/float.h \
+ /usr/include/glib-2.0/glib/garray.h \
+ /usr/include/glib-2.0/glib/gasyncqueue.h \
+ /usr/include/glib-2.0/glib/gthread.h /usr/include/glib-2.0/glib/gerror.h \
+ /usr/lib/gcc/i686-linux-gnu/4.6.1/include/stdarg.h \
+ /usr/include/glib-2.0/glib/gquark.h /usr/include/glib-2.0/glib/gutils.h \
+ /usr/include/glib-2.0/glib/gatomic.h \
+ /usr/include/glib-2.0/glib/gbacktrace.h /usr/include/signal.h \
+ /usr/include/i386-linux-gnu/bits/signum.h \
+ /usr/include/i386-linux-gnu/bits/siginfo.h \
+ /usr/include/i386-linux-gnu/bits/sigaction.h \
+ /usr/include/i386-linux-gnu/bits/sigcontext.h \
+ /usr/include/i386-linux-gnu/asm/sigcontext.h /usr/include/linux/types.h \
+ /usr/include/i386-linux-gnu/asm/types.h /usr/include/asm-generic/types.h \
+ /usr/include/asm-generic/int-ll64.h \
+ /usr/include/i386-linux-gnu/asm/bitsperlong.h \
+ /usr/include/asm-generic/bitsperlong.h /usr/include/linux/posix_types.h \
+ /usr/include/linux/stddef.h \
+ /usr/include/i386-linux-gnu/asm/posix_types.h \
+ /usr/include/i386-linux-gnu/asm/posix_types_32.h \
+ /usr/include/i386-linux-gnu/bits/sigstack.h \
+ /usr/include/i386-linux-gnu/sys/ucontext.h \
+ /usr/include/i386-linux-gnu/bits/sigthread.h \
+ /usr/include/glib-2.0/glib/gbase64.h \
+ /usr/include/glib-2.0/glib/gbitlock.h \
+ /usr/include/glib-2.0/glib/gbookmarkfile.h \
+ /usr/include/glib-2.0/glib/gcache.h /usr/include/glib-2.0/glib/glist.h \
+ /usr/include/glib-2.0/glib/gmem.h /usr/include/glib-2.0/glib/gslice.h \
+ /usr/include/glib-2.0/glib/gchecksum.h \
+ /usr/include/glib-2.0/glib/gcompletion.h \
+ /usr/include/glib-2.0/glib/gconvert.h \
+ /usr/include/glib-2.0/glib/gdataset.h /usr/include/glib-2.0/glib/gdate.h \
+ /usr/include/glib-2.0/glib/gdatetime.h \
+ /usr/include/glib-2.0/glib/gtimezone.h /usr/include/glib-2.0/glib/gdir.h \
+ /usr/include/glib-2.0/glib/gfileutils.h \
+ /usr/include/glib-2.0/glib/ghash.h /usr/include/glib-2.0/glib/ghmac.h \
+ /usr/include/glib-2.0/glib/gchecksum.h \
+ /usr/include/glib-2.0/glib/ghook.h \
+ /usr/include/glib-2.0/glib/ghostutils.h \
+ /usr/include/glib-2.0/glib/giochannel.h \
+ /usr/include/glib-2.0/glib/gmain.h /usr/include/glib-2.0/glib/gpoll.h \
+ /usr/include/glib-2.0/glib/gslist.h /usr/include/glib-2.0/glib/gstring.h \
+ /usr/include/glib-2.0/glib/gunicode.h \
+ /usr/include/glib-2.0/glib/gkeyfile.h \
+ /usr/include/glib-2.0/glib/gmappedfile.h \
+ /usr/include/glib-2.0/glib/gmarkup.h \
+ /usr/include/glib-2.0/glib/gmessages.h \
+ /usr/include/glib-2.0/glib/gnode.h /usr/include/glib-2.0/glib/goption.h \
+ /usr/include/glib-2.0/glib/gpattern.h \
+ /usr/include/glib-2.0/glib/gprimes.h /usr/include/glib-2.0/glib/gqsort.h \
+ /usr/include/glib-2.0/glib/gqueue.h /usr/include/glib-2.0/glib/grand.h \
+ /usr/include/glib-2.0/glib/grel.h /usr/include/glib-2.0/glib/gregex.h \
+ /usr/include/glib-2.0/glib/gscanner.h \
+ /usr/include/glib-2.0/glib/gsequence.h \
+ /usr/include/glib-2.0/glib/gshell.h /usr/include/glib-2.0/glib/gspawn.h \
+ /usr/include/glib-2.0/glib/gstrfuncs.h \
+ /usr/include/glib-2.0/glib/gtestutils.h \
+ /usr/include/glib-2.0/glib/gthreadpool.h \
+ /usr/include/glib-2.0/glib/gtimer.h /usr/include/glib-2.0/glib/gtree.h \
+ /usr/include/glib-2.0/glib/gurifuncs.h \
+ /usr/include/glib-2.0/glib/gvarianttype.h \
+ /usr/include/glib-2.0/glib/gvariant.h \
+ /usr/include/gmime-2.4/gmime/gmime-error.h \
+ /usr/include/gmime-2.4/gmime/gmime-charset.h \
+ /usr/include/gmime-2.4/gmime/gmime-iconv.h /usr/include/iconv.h \
+ /usr/include/gmime-2.4/gmime/gmime-iconv-utils.h \
+ /usr/include/gmime-2.4/gmime/gmime-param.h \
+ /usr/include/gmime-2.4/gmime/gmime-content-type.h \
+ /usr/include/glib-2.0/glib-object.h \
+ /usr/include/glib-2.0/gobject/gbinding.h \
+ /usr/include/glib-2.0/gobject/gobject.h \
+ /usr/include/glib-2.0/gobject/gtype.h \
+ /usr/include/glib-2.0/gobject/gvalue.h \
+ /usr/include/glib-2.0/gobject/gparam.h \
+ /usr/include/glib-2.0/gobject/gclosure.h \
+ /usr/include/glib-2.0/gobject/gsignal.h \
+ /usr/include/glib-2.0/gobject/gmarshal.h \
+ /usr/include/glib-2.0/gobject/gboxed.h \
+ /usr/include/glib-2.0/gobject/glib-types.h \
+ /usr/include/glib-2.0/gobject/genums.h \
+ /usr/include/glib-2.0/gobject/gparamspecs.h \
+ /usr/include/glib-2.0/gobject/gsourceclosure.h \
+ /usr/include/glib-2.0/gobject/gtypemodule.h \
+ /usr/include/glib-2.0/gobject/gtypeplugin.h \
+ /usr/include/glib-2.0/gobject/gvaluearray.h \
+ /usr/include/glib-2.0/gobject/gvaluetypes.h \
+ /usr/include/gmime-2.4/gmime/gmime-disposition.h \
+ /usr/include/gmime-2.4/gmime/gmime-data-wrapper.h \
+ /usr/include/gmime-2.4/gmime/gmime-encodings.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream.h /usr/include/stdio.h \
+ /usr/include/libio.h /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/include/i386-linux-gnu/bits/sys_errlist.h \
+ /usr/include/i386-linux-gnu/bits/stdio.h \
+ /usr/include/i386-linux-gnu/bits/stdio2.h \
+ /usr/include/gmime-2.4/gmime/gmime-utils.h \
+ /usr/include/gmime-2.4/gmime/gmime-object.h \
+ /usr/include/gmime-2.4/gmime/gmime-header.h \
+ /usr/include/gmime-2.4/gmime/gmime-part.h \
+ /usr/include/gmime-2.4/gmime/gmime-multipart.h \
+ /usr/include/gmime-2.4/gmime/gmime-multipart-encrypted.h \
+ /usr/include/gmime-2.4/gmime/gmime-cipher-context.h \
+ /usr/include/gmime-2.4/gmime/gmime-session.h \
+ /usr/include/gmime-2.4/gmime/gmime-multipart-signed.h \
+ /usr/include/gmime-2.4/gmime/gmime-message.h \
+ /usr/include/gmime-2.4/gmime/internet-address.h \
+ /usr/include/gmime-2.4/gmime/gmime-message-part.h \
+ /usr/include/gmime-2.4/gmime/gmime-message-partial.h \
+ /usr/include/gmime-2.4/gmime/gmime-parser.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-buffer.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-cat.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-file.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-filter.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-fs.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-mem.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-mmap.h \
+ /usr/include/gmime-2.4/gmime/gmime-stream-null.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-basic.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-best.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-charset.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-crlf.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-enriched.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-from.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-gzip.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-html.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-md5.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-strip.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-windows.h \
+ /usr/include/gmime-2.4/gmime/gmime-filter-yenc.h \
+ /usr/include/gmime-2.4/gmime/gmime-session-simple.h \
+ /usr/include/gmime-2.4/gmime/gmime-gpg-context.h \
+ /usr/include/glib-2.0/gmodule.h /usr/include/grp.h /usr/include/netdb.h \
+ /usr/include/rpc/netdb.h /usr/include/i386-linux-gnu/bits/netdb.h \
+ /usr/include/pwd.h /usr/include/syslog.h \
+ /usr/include/i386-linux-gnu/sys/syslog.h \
+ /usr/include/i386-linux-gnu/bits/syslog-path.h \
+ /usr/include/i386-linux-gnu/bits/syslog.h /usr/include/stdlib.h \
+ /usr/include/i386-linux-gnu/bits/waitflags.h \
+ /usr/include/i386-linux-gnu/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/i386-linux-gnu/bits/stdlib.h /usr/include/string.h \
+ /usr/include/i386-linux-gnu/bits/string.h \
+ /usr/include/i386-linux-gnu/bits/string2.h \
+ /usr/include/i386-linux-gnu/bits/string3.h /usr/include/strings.h \
+ /usr/include/sysexits.h /usr/include/i386-linux-gnu/sys/stat.h \
+ /usr/include/i386-linux-gnu/sys/mman.h \
+ /usr/include/i386-linux-gnu/bits/mman.h \
+ /usr/include/i386-linux-gnu/sys/un.h \
+ /usr/include/i386-linux-gnu/sys/time.h \
+ /usr/include/i386-linux-gnu/sys/wait.h \
+ /usr/include/i386-linux-gnu/sys/resource.h \
+ /usr/include/i386-linux-gnu/bits/resource.h \
+ /usr/include/i386-linux-gnu/sys/ipc.h \
+ /usr/include/i386-linux-gnu/bits/ipctypes.h \
+ /usr/include/i386-linux-gnu/bits/ipc.h \
+ /usr/include/i386-linux-gnu/sys/shm.h \
+ /usr/include/i386-linux-gnu/bits/shm.h \
+ /usr/include/i386-linux-gnu/sys/utsname.h \
+ /usr/include/i386-linux-gnu/bits/utsname.h /usr/include/termios.h \
+ /usr/include/i386-linux-gnu/bits/termios.h \
+ /usr/include/i386-linux-gnu/sys/ttydefaults.h /usr/include/unistd.h \
+ /usr/include/i386-linux-gnu/bits/posix_opt.h \
+ /usr/include/i386-linux-gnu/bits/environments.h \
+ /usr/include/i386-linux-gnu/bits/confname.h /usr/include/getopt.h \
+ /usr/include/i386-linux-gnu/bits/unistd.h /usr/include/mhash.h \
+ /usr/include/mutils/mincludes.h /usr/include/mutils/mhash_config.h \
+ /usr/lib/gcc/i686-linux-gnu/4.6.1/include/stdbool.h \
+ /usr/include/malloc.h /usr/include/values.h /usr/include/inttypes.h \
+ /usr/include/mutils/mglobal.h /usr/include/mutils/mtypes.h \
+ /usr/include/mutils/mutils.h /usr/include/mutils/mhash.h \
+ /usr/include/i386-linux-gnu/sys/queue.h /usr/include/evhttp.h \
+ /usr/include/event.h /usr/include/event2/event-config.h \
+ /usr/include/evutil.h /usr/include/event2/util.h \
+ /usr/include/event2/event_struct.h /usr/include/event2/keyvalq_struct.h \
+ /usr/include/event2/event.h /usr/include/event2/event_compat.h \
+ /usr/include/event2/buffer.h /usr/include/event2/buffer_compat.h \
+ /usr/include/event2/bufferevent.h \
+ /usr/include/event2/bufferevent_struct.h \
+ /usr/include/event2/bufferevent_compat.h /usr/include/event2/tag.h \
+ /usr/include/event2/tag_compat.h /usr/include/event2/http.h \
+ /usr/include/event2/http_struct.h /usr/include/event2/http_compat.h \
+ /usr/include/math.h /usr/include/i386-linux-gnu/bits/huge_val.h \
+ /usr/include/i386-linux-gnu/bits/huge_valf.h \
+ /usr/include/i386-linux-gnu/bits/huge_vall.h \
+ /usr/include/i386-linux-gnu/bits/inf.h \
+ /usr/include/i386-linux-gnu/bits/nan.h \
+ /usr/include/i386-linux-gnu/bits/mathdef.h \
+ /usr/include/i386-linux-gnu/bits/mathcalls.h \
+ /usr/include/i386-linux-gnu/bits/mathinline.h /usr/include/openssl/ssl.h \
+ /usr/include/openssl/e_os2.h /usr/include/openssl/opensslconf.h \
+ /usr/include/openssl/comp.h /usr/include/openssl/crypto.h \
+ /usr/include/openssl/stack.h /usr/include/openssl/safestack.h \
+ /usr/include/openssl/opensslv.h /usr/include/openssl/ossl_typ.h \
+ /usr/include/openssl/symhacks.h /usr/include/openssl/bio.h \
+ /usr/include/openssl/x509.h /usr/include/openssl/buffer.h \
+ /usr/include/openssl/evp.h /usr/include/openssl/objects.h \
+ /usr/include/openssl/obj_mac.h /usr/include/openssl/asn1.h \
+ /usr/include/openssl/bn.h /usr/include/openssl/ec.h \
+ /usr/include/openssl/ecdsa.h /usr/include/openssl/ecdh.h \
+ /usr/include/openssl/rsa.h /usr/include/openssl/dsa.h \
+ /usr/include/openssl/dh.h /usr/include/openssl/sha.h \
+ /usr/include/openssl/x509_vfy.h /usr/include/openssl/lhash.h \
+ /usr/include/openssl/pkcs7.h /usr/include/openssl/pem.h \
+ /usr/include/openssl/pem2.h /usr/include/openssl/hmac.h \
+ /usr/include/openssl/kssl.h /usr/include/openssl/ssl2.h \
+ /usr/include/openssl/ssl3.h /usr/include/openssl/tls1.h \
+ /usr/include/openssl/dtls1.h /usr/include/openssl/pqueue.h \
+ /usr/include/openssl/ssl23.h /usr/include/zdb/URL.h \
+ /usr/include/zdb/ResultSet.h /usr/include/zdb/PreparedStatement.h \
+ /usr/include/zdb/Connection.h /usr/include/zdb/ConnectionPool.h \
+ /usr/include/zdb/SQLException.h /usr/include/zdb/Exception.h \
+ /usr/include/setjmp.h /usr/include/i386-linux-gnu/bits/setjmp.h \
+ /usr/include/i386-linux-gnu/bits/setjmp2.h /usr/include/pthread.h \
+ /usr/include/sched.h /usr/include/i386-linux-gnu/bits/sched.h \
+ /usr/local/include/libmemcached/memcached.h \
+ /usr/local/include/libmemcached-1.0/memcached.h \
+ /usr/local/include/libmemcached-1.0/visibility.h \
+ /usr/local/include/libmemcached-1.0/configure.h \
+ /usr/local/include/libmemcached-1.0/platform.h \
+ /usr/include/netinet/tcp.h /usr/local/include/libmemcached-1.0/limits.h \
+ /usr/local/include/libmemcached-1.0/defaults.h \
+ /usr/local/include/libmemcached-1.0/types/behavior.h \
+ /usr/local/include/libmemcached-1.0/types/callback.h \
+ /usr/local/include/libmemcached-1.0/types/connection.h \
+ /usr/local/include/libmemcached-1.0/types/hash.h \
+ /usr/local/include/libmemcached-1.0/types/return.h \
+ /usr/local/include/libmemcached-1.0/types/server_distribution.h \
+ /usr/local/include/libmemcached-1.0/return.h \
+ /usr/local/include/libmemcached-1.0/types.h \
+ /usr/local/include/libmemcached-1.0/callbacks.h \
+ /usr/local/include/libmemcached-1.0/alloc.h \
+ /usr/local/include/libmemcached-1.0/triggers.h \
+ /usr/local/include/libhashkit-1.0/hashkit.h \
+ /usr/local/include/libhashkit-1.0/visibility.h \
+ /usr/local/include/libhashkit-1.0/configure.h \
+ /usr/local/include/libhashkit-1.0/types.h \
+ /usr/local/include/libhashkit-1.0/has.h \
+ /usr/local/include/libhashkit-1.0/algorithm.h \
+ /usr/local/include/libhashkit-1.0/behavior.h \
+ /usr/local/include/libhashkit-1.0/digest.h \
+ /usr/local/include/libhashkit-1.0/function.h \
+ /usr/local/include/libhashkit-1.0/str_algorithm.h \
+ /usr/local/include/libhashkit-1.0/strerror.h \
+ /usr/local/include/libmemcached-1.0/struct/callback.h \
+ /usr/local/include/libmemcached-1.0/struct/string.h \
+ /usr/local/include/libmemcached-1.0/struct/result.h \
+ /usr/local/include/libmemcached-1.0/struct/allocator.h \
+ /usr/local/include/libmemcached-1.0/struct/sasl.h \
+ /usr/local/include/libmemcached-1.0/struct/memcached.h \
+ /usr/local/include/libmemcached-1.0/struct/server.h \
+ /usr/local/include/libmemcached-1.0/struct/stat.h \
+ /usr/local/include/libmemcached-1.0/basic_string.h \
+ /usr/local/include/libmemcached-1.0/error.h \
+ /usr/local/include/libmemcached-1.0/stats.h \
+ /usr/local/include/libmemcached-1.0/allocators.h \
+ /usr/local/include/libmemcached-1.0/analyze.h \
+ /usr/local/include/libmemcached-1.0/struct/analysis.h \
+ /usr/local/include/libmemcached-1.0/auto.h \
+ /usr/local/include/libmemcached-1.0/behavior.h \
+ /usr/local/include/libmemcached-1.0/callback.h \
+ /usr/local/include/libmemcached-1.0/delete.h \
+ /usr/local/include/libmemcached-1.0/dump.h \
+ /usr/local/include/libmemcached-1.0/exist.h \
+ /usr/local/include/libmemcached-1.0/fetch.h \
+ /usr/local/include/libmemcached-1.0/flush.h \
+ /usr/local/include/libmemcached-1.0/flush_buffers.h \
+ /usr/local/include/libmemcached-1.0/get.h \
+ /usr/local/include/libmemcached-1.0/hash.h \
+ /usr/local/include/libmemcached-1.0/options.h \
+ /usr/local/include/libmemcached-1.0/parse.h \
+ /usr/local/include/libmemcached-1.0/quit.h \
+ /usr/local/include/libmemcached-1.0/result.h \
+ /usr/local/include/libmemcached-1.0/server.h \
+ /usr/local/include/libmemcached-1.0/server_list.h \
+ /usr/local/include/libmemcached-1.0/storage.h \
+ /usr/local/include/libmemcached-1.0/strerror.h \
+ /usr/local/include/libmemcached-1.0/touch.h \
+ /usr/local/include/libmemcached-1.0/verbosity.h \
+ /usr/local/include/libmemcached-1.0/version.h \
+ /usr/local/include/libmemcached-1.0/sasl.h \
+ /usr/local/include/libmemcached-1.0/deprecated_types.h dm_cram.h \
+ dm_capa.h dbmailtypes.h dm_config.h dm_list.h dm_debug.h dm_dsn.h \
+ dm_acl.h dm_mailboxstate.h dm_misc.h dm_quota.h dm_tls.h dbmail-user.h \
+ dbmail-mailbox.h dbmail-message.h dbmail-imapsession.h dm_cache.h \
+ dm_memblock.h imapcommands.h server.h clientsession.h clientbase.h \
+ lmtp.h dm_db.h dm_sievescript.h auth.h authmodule.h sort.h sortmodule.h \
+ dm_digest.h dm_cidr.h dm_iconv.h dm_getopt.h dm_match.h dm_sset.h \
+ dm_memcache.h /usr/include/crypt.h dm_request.h
+
+dbmail.h:
+
+../config.h:
+
+/usr/include/features.h:
+
+/usr/include/i386-linux-gnu/bits/predefs.h:
+
+/usr/include/i386-linux-gnu/sys/cdefs.h:
+
+/usr/include/i386-linux-gnu/bits/wordsize.h:
+
+/usr/include/i386-linux-gnu/gnu/stubs.h:
+
+/usr/include/i386-linux-gnu/gnu/stubs-32.h:
+
+/usr/include/assert.h:
+
+/usr/include/arpa/inet.h:
+
+/usr/include/netinet/in.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.6.1/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/i386-linux-gnu/bits/wchar.h:
+
+/usr/include/i386-linux-gnu/sys/socket.h:
+
+/usr/include/i386-linux-gnu/sys/uio.h:
+
+/usr/include/i386-linux-gnu/sys/types.h:
+
+/usr/include/i386-linux-gnu/bits/types.h:
+
+/usr/include/i386-linux-gnu/bits/typesizes.h:
+
+/usr/include/time.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.6.1/include/stddef.h:
+
+/usr/include/endian.h:
+
+/usr/include/i386-linux-gnu/bits/endian.h:
+
+/usr/include/i386-linux-gnu/bits/byteswap.h:
+
+/usr/include/i386-linux-gnu/sys/select.h:
+
+/usr/include/i386-linux-gnu/bits/select.h:
+
+/usr/include/i386-linux-gnu/bits/sigset.h:
+
+/usr/include/i386-linux-gnu/bits/time.h:
+
+/usr/include/i386-linux-gnu/sys/sysmacros.h:
+
+/usr/include/i386-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/i386-linux-gnu/bits/uio.h:
+
+/usr/include/i386-linux-gnu/bits/socket.h:
+
+/usr/include/i386-linux-gnu/bits/sockaddr.h:
+
+/usr/include/i386-linux-gnu/asm/socket.h:
+
+/usr/include/asm-generic/socket.h:
+
+/usr/include/i386-linux-gnu/asm/sockios.h:
+
+/usr/include/asm-generic/sockios.h:
+
+/usr/include/i386-linux-gnu/bits/socket2.h:
+
+/usr/include/i386-linux-gnu/bits/in.h:
+
+/usr/include/ctype.h:
+
+/usr/include/xlocale.h:
+
+/usr/include/errno.h:
+
+/usr/include/i386-linux-gnu/bits/errno.h:
+
+/usr/include/linux/errno.h:
+
+/usr/include/i386-linux-gnu/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:
+
+/usr/include/fcntl.h:
+
+/usr/include/i386-linux-gnu/bits/fcntl.h:
+
+/usr/include/i386-linux-gnu/bits/stat.h:
+
+/usr/include/i386-linux-gnu/bits/fcntl2.h:
+
+/usr/include/fnmatch.h:
+
+/usr/include/gmime-2.4/gmime/gmime.h:
+
+/usr/include/glib-2.0/glib.h:
+
+/usr/include/glib-2.0/glib/galloca.h:
+
+/usr/include/glib-2.0/glib/gtypes.h:
+
+/usr/lib/i386-linux-gnu/glib-2.0/include/glibconfig.h:
+
+/usr/include/glib-2.0/glib/gmacros.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.6.1/include-fixed/limits.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.6.1/include-fixed/syslimits.h:
+
+/usr/include/limits.h:
+
+/usr/include/i386-linux-gnu/bits/posix1_lim.h:
+
+/usr/include/i386-linux-gnu/bits/local_lim.h:
+
+/usr/include/linux/limits.h:
+
+/usr/include/i386-linux-gnu/bits/posix2_lim.h:
+
+/usr/include/i386-linux-gnu/bits/xopen_lim.h:
+
+/usr/include/i386-linux-gnu/bits/stdio_lim.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.6.1/include/float.h:
+
+/usr/include/glib-2.0/glib/garray.h:
+
+/usr/include/glib-2.0/glib/gasyncqueue.h:
+
+/usr/include/glib-2.0/glib/gthread.h:
+
+/usr/include/glib-2.0/glib/gerror.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.6.1/include/stdarg.h:
+
+/usr/include/glib-2.0/glib/gquark.h:
+
+/usr/include/glib-2.0/glib/gutils.h:
+
+/usr/include/glib-2.0/glib/gatomic.h:
+
+/usr/include/glib-2.0/glib/gbacktrace.h:
+
+/usr/include/signal.h:
+
+/usr/include/i386-linux-gnu/bits/signum.h:
+
+/usr/include/i386-linux-gnu/bits/siginfo.h:
+
+/usr/include/i386-linux-gnu/bits/sigaction.h:
+
+/usr/include/i386-linux-gnu/bits/sigcontext.h:
+
+/usr/include/i386-linux-gnu/asm/sigcontext.h:
+
+/usr/include/linux/types.h:
+
+/usr/include/i386-linux-gnu/asm/types.h:
+
+/usr/include/asm-generic/types.h:
+
+/usr/include/asm-generic/int-ll64.h:
+
+/usr/include/i386-linux-gnu/asm/bitsperlong.h:
+
+/usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/linux/posix_types.h:
+
+/usr/include/linux/stddef.h:
+
+/usr/include/i386-linux-gnu/asm/posix_types.h:
+
+/usr/include/i386-linux-gnu/asm/posix_types_32.h:
+
+/usr/include/i386-linux-gnu/bits/sigstack.h:
+
+/usr/include/i386-linux-gnu/sys/ucontext.h:
+
+/usr/include/i386-linux-gnu/bits/sigthread.h:
+
+/usr/include/glib-2.0/glib/gbase64.h:
+
+/usr/include/glib-2.0/glib/gbitlock.h:
+
+/usr/include/glib-2.0/glib/gbookmarkfile.h:
+
+/usr/include/glib-2.0/glib/gcache.h:
+
+/usr/include/glib-2.0/glib/glist.h:
+
+/usr/include/glib-2.0/glib/gmem.h:
+
+/usr/include/glib-2.0/glib/gslice.h:
+
+/usr/include/glib-2.0/glib/gchecksum.h:
+
+/usr/include/glib-2.0/glib/gcompletion.h:
+
+/usr/include/glib-2.0/glib/gconvert.h:
+
+/usr/include/glib-2.0/glib/gdataset.h:
+
+/usr/include/glib-2.0/glib/gdate.h:
+
+/usr/include/glib-2.0/glib/gdatetime.h:
+
+/usr/include/glib-2.0/glib/gtimezone.h:
+
+/usr/include/glib-2.0/glib/gdir.h:
+
+/usr/include/glib-2.0/glib/gfileutils.h:
+
+/usr/include/glib-2.0/glib/ghash.h:
+
+/usr/include/glib-2.0/glib/ghmac.h:
+
+/usr/include/glib-2.0/glib/gchecksum.h:
+
+/usr/include/glib-2.0/glib/ghook.h:
+
+/usr/include/glib-2.0/glib/ghostutils.h:
+
+/usr/include/glib-2.0/glib/giochannel.h:
+
+/usr/include/glib-2.0/glib/gmain.h:
+
+/usr/include/glib-2.0/glib/gpoll.h:
+
+/usr/include/glib-2.0/glib/gslist.h:
+
+/usr/include/glib-2.0/glib/gstring.h:
+
+/usr/include/glib-2.0/glib/gunicode.h:
+
+/usr/include/glib-2.0/glib/gkeyfile.h:
+
+/usr/include/glib-2.0/glib/gmappedfile.h:
+
+/usr/include/glib-2.0/glib/gmarkup.h:
+
+/usr/include/glib-2.0/glib/gmessages.h:
+
+/usr/include/glib-2.0/glib/gnode.h:
+
+/usr/include/glib-2.0/glib/goption.h:
+
+/usr/include/glib-2.0/glib/gpattern.h:
+
+/usr/include/glib-2.0/glib/gprimes.h:
+
+/usr/include/glib-2.0/glib/gqsort.h:
+
+/usr/include/glib-2.0/glib/gqueue.h:
+
+/usr/include/glib-2.0/glib/grand.h:
+
+/usr/include/glib-2.0/glib/grel.h:
+
+/usr/include/glib-2.0/glib/gregex.h:
+
+/usr/include/glib-2.0/glib/gscanner.h:
+
+/usr/include/glib-2.0/glib/gsequence.h:
+
+/usr/include/glib-2.0/glib/gshell.h:
+
+/usr/include/glib-2.0/glib/gspawn.h:
+
+/usr/include/glib-2.0/glib/gstrfuncs.h:
+
+/usr/include/glib-2.0/glib/gtestutils.h:
+
+/usr/include/glib-2.0/glib/gthreadpool.h:
+
+/usr/include/glib-2.0/glib/gtimer.h:
+
+/usr/include/glib-2.0/glib/gtree.h:
+
+/usr/include/glib-2.0/glib/gurifuncs.h:
+
+/usr/include/glib-2.0/glib/gvarianttype.h:
+
+/usr/include/glib-2.0/glib/gvariant.h:
+
+/usr/include/gmime-2.4/gmime/gmime-error.h:
+
+/usr/include/gmime-2.4/gmime/gmime-charset.h:
+
+/usr/include/gmime-2.4/gmime/gmime-iconv.h:
+
+/usr/include/iconv.h:
+
+/usr/include/gmime-2.4/gmime/gmime-iconv-utils.h:
+
+/usr/include/gmime-2.4/gmime/gmime-param.h:
+
+/usr/include/gmime-2.4/gmime/gmime-content-type.h:
+
+/usr/include/glib-2.0/glib-object.h:
+
+/usr/include/glib-2.0/gobject/gbinding.h:
+
+/usr/include/glib-2.0/gobject/gobject.h:
+
+/usr/include/glib-2.0/gobject/gtype.h:
+
+/usr/include/glib-2.0/gobject/gvalue.h:
+
+/usr/include/glib-2.0/gobject/gparam.h:
+
+/usr/include/glib-2.0/gobject/gclosure.h:
+
+/usr/include/glib-2.0/gobject/gsignal.h:
+
+/usr/include/glib-2.0/gobject/gmarshal.h:
+
+/usr/include/glib-2.0/gobject/gboxed.h:
+
+/usr/include/glib-2.0/gobject/glib-types.h:
+
+/usr/include/glib-2.0/gobject/genums.h:
+
+/usr/include/glib-2.0/gobject/gparamspecs.h:
+
+/usr/include/glib-2.0/gobject/gsourceclosure.h:
+
+/usr/include/glib-2.0/gobject/gtypemodule.h:
+
+/usr/include/glib-2.0/gobject/gtypeplugin.h:
+
+/usr/include/glib-2.0/gobject/gvaluearray.h:
+
+/usr/include/glib-2.0/gobject/gvaluetypes.h:
+
+/usr/include/gmime-2.4/gmime/gmime-disposition.h:
+
+/usr/include/gmime-2.4/gmime/gmime-data-wrapper.h:
+
+/usr/include/gmime-2.4/gmime/gmime-encodings.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream.h:
+
+/usr/include/stdio.h:
+
+/usr/include/libio.h:
+
+/usr/include/_G_config.h:
+
+/usr/include/wchar.h:
+
+/usr/include/i386-linux-gnu/bits/sys_errlist.h:
+
+/usr/include/i386-linux-gnu/bits/stdio.h:
+
+/usr/include/i386-linux-gnu/bits/stdio2.h:
+
+/usr/include/gmime-2.4/gmime/gmime-utils.h:
+
+/usr/include/gmime-2.4/gmime/gmime-object.h:
+
+/usr/include/gmime-2.4/gmime/gmime-header.h:
+
+/usr/include/gmime-2.4/gmime/gmime-part.h:
+
+/usr/include/gmime-2.4/gmime/gmime-multipart.h:
+
+/usr/include/gmime-2.4/gmime/gmime-multipart-encrypted.h:
+
+/usr/include/gmime-2.4/gmime/gmime-cipher-context.h:
+
+/usr/include/gmime-2.4/gmime/gmime-session.h:
+
+/usr/include/gmime-2.4/gmime/gmime-multipart-signed.h:
+
+/usr/include/gmime-2.4/gmime/gmime-message.h:
+
+/usr/include/gmime-2.4/gmime/internet-address.h:
+
+/usr/include/gmime-2.4/gmime/gmime-message-part.h:
+
+/usr/include/gmime-2.4/gmime/gmime-message-partial.h:
+
+/usr/include/gmime-2.4/gmime/gmime-parser.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-buffer.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-cat.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-file.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-filter.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-fs.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-mem.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-mmap.h:
+
+/usr/include/gmime-2.4/gmime/gmime-stream-null.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-basic.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-best.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-charset.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-crlf.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-enriched.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-from.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-gzip.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-html.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-md5.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-strip.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-windows.h:
+
+/usr/include/gmime-2.4/gmime/gmime-filter-yenc.h:
+
+/usr/include/gmime-2.4/gmime/gmime-session-simple.h:
+
+/usr/include/gmime-2.4/gmime/gmime-gpg-context.h:
+
+/usr/include/glib-2.0/gmodule.h:
+
+/usr/include/grp.h:
+
+/usr/include/netdb.h:
+
+/usr/include/rpc/netdb.h:
+
+/usr/include/i386-linux-gnu/bits/netdb.h:
+
+/usr/include/pwd.h:
+
+/usr/include/syslog.h:
+
+/usr/include/i386-linux-gnu/sys/syslog.h:
+
+/usr/include/i386-linux-gnu/bits/syslog-path.h:
+
+/usr/include/i386-linux-gnu/bits/syslog.h:
+
+/usr/include/stdlib.h:
+
+/usr/include/i386-linux-gnu/bits/waitflags.h:
+
+/usr/include/i386-linux-gnu/bits/waitstatus.h:
+
+/usr/include/alloca.h:
+
+/usr/include/i386-linux-gnu/bits/stdlib.h:
+
+/usr/include/string.h:
+
+/usr/include/i386-linux-gnu/bits/string.h:
+
+/usr/include/i386-linux-gnu/bits/string2.h:
+
+/usr/include/i386-linux-gnu/bits/string3.h:
+
+/usr/include/strings.h:
+
+/usr/include/sysexits.h:
+
+/usr/include/i386-linux-gnu/sys/stat.h:
+
+/usr/include/i386-linux-gnu/sys/mman.h:
+
+/usr/include/i386-linux-gnu/bits/mman.h:
+
+/usr/include/i386-linux-gnu/sys/un.h:
+
+/usr/include/i386-linux-gnu/sys/time.h:
+
+/usr/include/i386-linux-gnu/sys/wait.h:
+
+/usr/include/i386-linux-gnu/sys/resource.h:
+
+/usr/include/i386-linux-gnu/bits/resource.h:
+
+/usr/include/i386-linux-gnu/sys/ipc.h:
+
+/usr/include/i386-linux-gnu/bits/ipctypes.h:
+
+/usr/include/i386-linux-gnu/bits/ipc.h:
+
+/usr/include/i386-linux-gnu/sys/shm.h:
+
+/usr/include/i386-linux-gnu/bits/shm.h:
+
+/usr/include/i386-linux-gnu/sys/utsname.h:
+
+/usr/include/i386-linux-gnu/bits/utsname.h:
+
+/usr/include/termios.h:
+
+/usr/include/i386-linux-gnu/bits/termios.h:
+
+/usr/include/i386-linux-gnu/sys/ttydefaults.h:
+
+/usr/include/unistd.h:
+
+/usr/include/i386-linux-gnu/bits/posix_opt.h:
+
+/usr/include/i386-linux-gnu/bits/environments.h:
+
+/usr/include/i386-linux-gnu/bits/confname.h:
+
+/usr/include/getopt.h:
+
+/usr/include/i386-linux-gnu/bits/unistd.h:
+
+/usr/include/mhash.h:
+
+/usr/include/mutils/mincludes.h:
+
+/usr/include/mutils/mhash_config.h:
+
+/usr/lib/gcc/i686-linux-gnu/4.6.1/include/stdbool.h:
+
+/usr/include/malloc.h:
+
+/usr/include/values.h:
+
+/usr/include/inttypes.h:
+
+/usr/include/mutils/mglobal.h:
+
+/usr/include/mutils/mtypes.h:
+
+/usr/include/mutils/mutils.h:
+
+/usr/include/mutils/mhash.h:
+
+/usr/include/i386-linux-gnu/sys/queue.h:
+
+/usr/include/evhttp.h:
+
+/usr/include/event.h:
+
+/usr/include/event2/event-config.h:
+
+/usr/include/evutil.h:
+
+/usr/include/event2/util.h:
+
+/usr/include/event2/event_struct.h:
+
+/usr/include/event2/keyvalq_struct.h:
+
+/usr/include/event2/event.h:
+
+/usr/include/event2/event_compat.h:
+
+/usr/include/event2/buffer.h:
+
+/usr/include/event2/buffer_compat.h:
+
+/usr/include/event2/bufferevent.h:
+
+/usr/include/event2/bufferevent_struct.h:
+
+/usr/include/event2/bufferevent_compat.h:
+
+/usr/include/event2/tag.h:
+
+/usr/include/event2/tag_compat.h:
+
+/usr/include/event2/http.h:
+
+/usr/include/event2/http_struct.h:
+
+/usr/include/event2/http_compat.h:
+
+/usr/include/math.h:
+
+/usr/include/i386-linux-gnu/bits/huge_val.h:
+
+/usr/include/i386-linux-gnu/bits/huge_valf.h:
+
+/usr/include/i386-linux-gnu/bits/huge_vall.h:
+
+/usr/include/i386-linux-gnu/bits/inf.h:
+
+/usr/include/i386-linux-gnu/bits/nan.h:
+
+/usr/include/i386-linux-gnu/bits/mathdef.h:
+
+/usr/include/i386-linux-gnu/bits/mathcalls.h:
+
+/usr/include/i386-linux-gnu/bits/mathinline.h:
+
+/usr/include/openssl/ssl.h:
+
+/usr/include/openssl/e_os2.h:
+
+/usr/include/openssl/opensslconf.h:
+
+/usr/include/openssl/comp.h:
+
+/usr/include/openssl/crypto.h:
+
+/usr/include/openssl/stack.h:
+
+/usr/include/openssl/safestack.h:
+
+/usr/include/openssl/opensslv.h:
+
+/usr/include/openssl/ossl_typ.h:
+
+/usr/include/openssl/symhacks.h:
+
+/usr/include/openssl/bio.h:
+
+/usr/include/openssl/x509.h:
+
+/usr/include/openssl/buffer.h:
+
+/usr/include/openssl/evp.h:
+
+/usr/include/openssl/objects.h:
+
+/usr/include/openssl/obj_mac.h:
+
+/usr/include/openssl/asn1.h:
+
+/usr/include/openssl/bn.h:
+
+/usr/include/openssl/ec.h:
+
+/usr/include/openssl/ecdsa.h:
+
+/usr/include/openssl/ecdh.h:
+
+/usr/include/openssl/rsa.h:
+
+/usr/include/openssl/dsa.h:
+
+/usr/include/openssl/dh.h:
+
+/usr/include/openssl/sha.h:
+
+/usr/include/openssl/x509_vfy.h:
+
+/usr/include/openssl/lhash.h:
+
+/usr/include/openssl/pkcs7.h:
+
+/usr/include/openssl/pem.h:
+
+/usr/include/openssl/pem2.h:
+
+/usr/include/openssl/hmac.h:
+
+/usr/include/openssl/kssl.h:
+
+/usr/include/openssl/ssl2.h:
+
+/usr/include/openssl/ssl3.h:
+
+/usr/include/openssl/tls1.h:
+
+/usr/include/openssl/dtls1.h:
+
+/usr/include/openssl/pqueue.h:
+
+/usr/include/openssl/ssl23.h:
+
+/usr/include/zdb/URL.h:
+
+/usr/include/zdb/ResultSet.h:
+
+/usr/include/zdb/PreparedStatement.h:
+
+/usr/include/zdb/Connection.h:
+
+/usr/include/zdb/ConnectionPool.h:
+
+/usr/include/zdb/SQLException.h:
+
+/usr/include/zdb/Exception.h:
+
+/usr/include/setjmp.h:
+
+/usr/include/i386-linux-gnu/bits/setjmp.h:
+
+/usr/include/i386-linux-gnu/bits/setjmp2.h:
+
+/usr/include/pthread.h:
+
+/usr/include/sched.h:
+
+/usr/include/i386-linux-gnu/bits/sched.h:
+
+/usr/local/include/libmemcached/memcached.h:
+
+/usr/local/include/libmemcached-1.0/memcached.h:
+
+/usr/local/include/libmemcached-1.0/visibility.h:
+
+/usr/local/include/libmemcached-1.0/configure.h:
+
+/usr/local/include/libmemcached-1.0/platform.h:
+
+/usr/include/netinet/tcp.h:
+
+/usr/local/include/libmemcached-1.0/limits.h:
+
+/usr/local/include/libmemcached-1.0/defaults.h:
+
+/usr/local/include/libmemcached-1.0/types/behavior.h:
+
+/usr/local/include/libmemcached-1.0/types/callback.h:
+
+/usr/local/include/libmemcached-1.0/types/connection.h:
+
+/usr/local/include/libmemcached-1.0/types/hash.h:
+
+/usr/local/include/libmemcached-1.0/types/return.h:
+
+/usr/local/include/libmemcached-1.0/types/server_distribution.h:
+
+/usr/local/include/libmemcached-1.0/return.h:
+
+/usr/local/include/libmemcached-1.0/types.h:
+
+/usr/local/include/libmemcached-1.0/callbacks.h:
+
+/usr/local/include/libmemcached-1.0/alloc.h:
+
+/usr/local/include/libmemcached-1.0/triggers.h:
+
+/usr/local/include/libhashkit-1.0/hashkit.h:
+
+/usr/local/include/libhashkit-1.0/visibility.h:
+
+/usr/local/include/libhashkit-1.0/configure.h:
+
+/usr/local/include/libhashkit-1.0/types.h:
+
+/usr/local/include/libhashkit-1.0/has.h:
+
+/usr/local/include/libhashkit-1.0/algorithm.h:
+
+/usr/local/include/libhashkit-1.0/behavior.h:
+
+/usr/local/include/libhashkit-1.0/digest.h:
+
+/usr/local/include/libhashkit-1.0/function.h:
+
+/usr/local/include/libhashkit-1.0/str_algorithm.h:
+
+/usr/local/include/libhashkit-1.0/strerror.h:
+
+/usr/local/include/libmemcached-1.0/struct/callback.h:
+
+/usr/local/include/libmemcached-1.0/struct/string.h:
+
+/usr/local/include/libmemcached-1.0/struct/result.h:
+
+/usr/local/include/libmemcached-1.0/struct/allocator.h:
+
+/usr/local/include/libmemcached-1.0/struct/sasl.h:
+
+/usr/local/include/libmemcached-1.0/struct/memcached.h:
+
+/usr/local/include/libmemcached-1.0/struct/server.h:
+
+/usr/local/include/libmemcached-1.0/struct/stat.h:
+
+/usr/local/include/libmemcached-1.0/basic_string.h:
+
+/usr/local/include/libmemcached-1.0/error.h:
+
+/usr/local/include/libmemcached-1.0/stats.h:
+
+/usr/local/include/libmemcached-1.0/allocators.h:
+
+/usr/local/include/libmemcached-1.0/analyze.h:
+
+/usr/local/include/libmemcached-1.0/struct/analysis.h:
+
+/usr/local/include/libmemcached-1.0/auto.h:
+
+/usr/local/include/libmemcached-1.0/behavior.h:
+
+/usr/local/include/libmemcached-1.0/callback.h:
+
+/usr/local/include/libmemcached-1.0/delete.h:
+
+/usr/local/include/libmemcached-1.0/dump.h:
+
+/usr/local/include/libmemcached-1.0/exist.h:
+
+/usr/local/include/libmemcached-1.0/fetch.h:
+
+/usr/local/include/libmemcached-1.0/flush.h:
+
+/usr/local/include/libmemcached-1.0/flush_buffers.h:
+
+/usr/local/include/libmemcached-1.0/get.h:
+
+/usr/local/include/libmemcached-1.0/hash.h:
+
+/usr/local/include/libmemcached-1.0/options.h:
+
+/usr/local/include/libmemcached-1.0/parse.h:
+
+/usr/local/include/libmemcached-1.0/quit.h:
+
+/usr/local/include/libmemcached-1.0/result.h:
+
+/usr/local/include/libmemcached-1.0/server.h:
+
+/usr/local/include/libmemcached-1.0/server_list.h:
+
+/usr/local/include/libmemcached-1.0/storage.h:
+
+/usr/local/include/libmemcached-1.0/strerror.h:
+
+/usr/local/include/libmemcached-1.0/touch.h:
+
+/usr/local/include/libmemcached-1.0/verbosity.h:
+
+/usr/local/include/libmemcached-1.0/version.h:
+
+/usr/local/include/libmemcached-1.0/sasl.h:
+
+/usr/local/include/libmemcached-1.0/deprecated_types.h:
+
+dm_cram.h:
+
+dm_capa.h:
+
+dbmailtypes.h:
+
+dm_config.h:
+
+dm_list.h:
+
+dm_debug.h:
+
+dm_dsn.h:
+
+dm_acl.h:
+
+dm_mailboxstate.h:
+
+dm_misc.h:
+
+dm_quota.h:
+
+dm_tls.h:
+
+dbmail-user.h:
+
+dbmail-mailbox.h:
+
+dbmail-message.h:
+
+dbmail-imapsession.h:
+
+dm_cache.h:
+
+dm_memblock.h:
+
+imapcommands.h:
+
+server.h:
+
+clientsession.h:
+
+clientbase.h:
+
+lmtp.h:
+
+dm_db.h:
+
+dm_sievescript.h:
+
+auth.h:
+
+authmodule.h:
+
+sort.h:
+
+sortmodule.h:
+
+dm_digest.h:
+
+dm_cidr.h:
+
+dm_iconv.h:
+
+dm_getopt.h:
+
+dm_match.h:
+
+dm_sset.h:
+
+dm_memcache.h:
+
+/usr/include/crypt.h:
+
+dm_request.h:
