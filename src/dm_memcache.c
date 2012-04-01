@@ -6,6 +6,8 @@
 
 #define MEMCACHE "Y"
 #define MC_SERVER1 "127.0.0.1"
+#define MEMCACHE_PRFX "dbm"
+#define KEY_SIZE 20
 
 int chkmc(){
 	if(MEMCACHE == "Y" || MEMCACHE == "y" || MEMCACHE == "yes" || MEMCACHE == "YES")
@@ -22,6 +24,51 @@ const char setservers(){
 	return servers;
 }
 */
+
+char construct_keyname(char*key, char*postfix){
+	char *keyname;
+	snprintf(keyname,(strlen(MEMCACHE_PRFX)+strlen(postfix)+strlen(key)),"%s%s_%s",MEMCACHE_PRFX, key, postfix);
+	return keyname;	
+}
+
+int memcache_gid(char*username){
+	char keyuser[KEY_SIZE];
+	char *ret;
+	t64_u ret64u;
+	keyuser = construct_keyname("idnr",username);
+        ret = getmc(keyuser);
+        if(ret != NULL)
+        	ret64u = atoi(ret);
+	return ret64u;
+}
+
+void memcache_sid(char*username, int*id){
+	
+}
+
+char memcache_gpasswd(int *id){
+	char keypasswd[KEY_SIZE];
+	char *ret;
+
+	keypasswd = construct_keyname("passwd",id);
+
+}
+
+void memcache_spasswd(int*id,char*passwd){
+
+}
+
+char memcache_gpw_encoding(int *id){
+	char keyencode[KEY_SIZE];
+	char *ret;
+
+	keyencode = construct_keyname("encode",id);
+
+}
+
+char memcache_spw_encoding(int *id){
+
+}
 
 int setmc(char* key, char* value){
 	memcached_st * memc = memcached_create(NULL);
