@@ -1,0 +1,583 @@
+#include "dbmail.h"
+//#include <stdio.h>
+//#include <sys/types.h>
+//#include <glib.h>
+//#include <pthread.h>
+#include <libmemcached/memcached.h>
+#include "dm_memcache.h"
+
+#define MEMCACHE "Y"
+#define MC_SERVER1 "127.0.0.1"
+#define MEMCACHE_PRFX "dbm"
+#define KEY_SIZE 20
+#define MAX_VALUE 1024
+#define VALUE_SIZE 1024
+#define KEY_BUFFER
+#define DAY_SECONDS 86400
+#define THIS_MODULE "memcache"
+
+// GET buffers for memcache
+struct memcache_buffer{
+	char *keys[], *values[], *returns[];
+	int  elements, owner, code=1;
+}
+
+
+
+char *key_get_buffer[], *values_get_buffer[], *return_get_buffer[];
+int buffer_get_elements, memcache_get_code=1, buffers_get_owner=0,startid=100;
+
+pthread_mutex_t memcache_get_mutex = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t memcache_get_owner_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+//setbuffers for memcache
+char *key_set_buffer[], *values_set_buffer[], *return_set_buffer[];
+int buffer_set_elements, memcache_set_code=1, buffers_set_owner=0;
+
+//pthread_mutex_t memcache_set_mutex = PTHREAD_MUTEX_INITIALIZER;
+//pthread_mutex_t memcache_set_owner_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+//pthread_cond_t memcache_cond_readb = PTHREAD_COND_INITIALIZER;
+//pthread_cond_t memcache_cond_writeb = PTHREAD_COND_INITIALIZER;
+
+
+int memcache_check(){
+	if(MEMCACHE == "Y" || MEMCACHE == "y" || MEMCACHE == "yes" || MEMCACHE == "YES")
+		return 1;
+	else
+		return 0;
+}
+/**
+void memcache_flushmsg(){
+	time_t curtime;
+	bufferaction="del";
+	pos=strchr(keyname,"-");
+	if((msgtime+24)>curtime){
+		keybuffer[a]=keyname;
+		a++;
+	}	
+	bufferelements=a;
+	
+	memcache_lock=0;
+	while(memcache_lock==0)
+		sleep(1);
+
+}
+**/
+/**	
+char * memcache_setmsg(){
+
+}
+**/
+/**
+void memcache_setmsg(char * data,int * uid,int *msgid){
+	char postfix;
+	time_t curtime;
+	curtime = time(NULL);
+	curtime = curtime/3600;
+	sprintf(postfix,"%d-%d",msgid,curtime);
+	construct_keyname(atoi(uid), postfix);
+	memcache_set(keyname, data);
+	
+}
+**/
+char* construct_keyname(char *key, char *postfix){
+        char *keyname;
+        keyname = g_new0(char,KEY_SIZE); //allocate memory that is freed inmemcache_gstr and memcache_gid
+
+        snprintf(keyname,
+                KEY_SIZE,
+                "%s%s_%s",
+                MEMCACHE_PRFX,
+                key,
+                postfix);
+	
+        return keyname;
+}
+
+char *memcache_gstr(char *key, int id){
+        char *ret, *keyname, keyid[4];
+	ret = g_new0(char,VALUE_SIZE);
+	keyname = g_new0(char,KEY_SIZE);
+	memset(keyid, 0, sizeof(keyid));
+
+        sprintf(keyid,"%d",id);
+        keyname= construct_keyname(key,keyid);
+        printf("key: %s\n", keyname);
+	ret = memcache_get(keyname);
+        g_free(keyname);
+	g_free(keyid);
+	return ret;
+}
+
+void memcache_sstr(char *key, int id,char*value){
+        char keyid[4];
+	memset(keyid, 0, sizeof(keyid));
+
+        sprintf(keyid,"%d",id);
+        key = construct_keyname(key,keyid);
+        printf("sstr: %s,%d,%s\n",key,id,value);
+        memcache_set(key,value);
+        g_free(key);
+}
+
+int memcache_gint(char*key,char*postfix){
+	char *keyuser, *ret;
+        int *ret64u;
+	keyuser = g_new0(char,KEY_SIZE);
+	ret = g_new0(char,VALUE_SIZE);
+	ret64u = g_new0(int,4);
+
+        keyuser = construct_keyname(key,postfix);
+        ret = memcache_get(keyuser);
+        free(keyuser);
+       
+	//printf("%s",ret);
+                *ret64u=atoi(ret);
+	free(ret);	
+	//printf("%d",ret64u);
+        return ret64u;
+
+}
+
+void memcache_sint(char*key, int id,char*value){
+//	char *keyuser;
+	//char *value;
+//	value = (char *)malloc(MAX_VALUE*sizeof(char));
+//	sprintf(value,"%d",id);
+//	keyuser = construct_keyname(key,
+}
+
+int memcache_gid(char*username){
+	char *keyuser, *ret;
+        int *ret64u;
+	keyuser=g_new0(char,KEY_SIZE);
+	ret=g_new0(char, VALUE_SIZE);
+	ret64u=g_new(int,4);
+        keyuser = construct_keyname("idnr",username);
+        ret64u = atoi(memcache_get(keyuser));
+        free(keyuser);
+	//printf("ret: %s",ret);
+	//ret64u=atoi(ret);
+	//printf("ret: %d",ret64u);
+	free(ret);
+	return ret64u;
+}
+
+void memcache_sid(char*username, int*id){
+	char *keyuser, *value;
+	//TRACE(TRACE_DEBUG,"memcache_sid [%s] [%d]",username, id);
+	//printf("memcache_sid: %s %d\n",username,id);
+	keyuser=g_new0(char,KEY_SIZE);
+	value=g_new0(char,VALUE_SIZE);
+	sprintf(value,"%d",id);
+	keyuser = construct_keyname("idnr",username);
+	//TRACE(TRACE_DEBUG,"memcache_sid contructed keyname [%s]",keyuser);
+	//printf("memcache_sid %s\m",keyuser);
+	memcache_set(keyuser,value);
+	g_free(keyuser);	
+	g_free(value);
+}
+
+int memcache_intreturn(char*string){
+	return atoi(string);
+}
+
+char *memcache_charreturn(long int number){
+	char *buffer;
+	buffer = g_new0(char,VALUE_SIZE);
+	snprintf(buffer,"%d",number);
+	return buffer;
+}
+
+char *memcache_gencode(int id){
+        return memcache_gstr("encode",id);
+}
+long int memcache_gmaxmail(int id){
+	return strtol(memcache_gstr("maxmail",id),NULL,0);
+}
+
+long int memcache_gcurmail(int id){
+	return strtol(memcache_gstr("curmail",id),NULL,0);
+}
+
+long int *memcache_gmaxseive(int id){
+	return strtol(memcache_gstr("maxseive",id),NULL,0);
+}
+
+void memcache_smaxmail(int id, long int *value){
+	memcache_sstr("maxmail",id,memcache_charreturn(value));
+}
+
+void memcache_sencode(int id,char *value){
+        memcache_sstr("encode",id,value);
+}
+void memcache_scurmail(int id, long int value){
+	memcache_sstr("curmail",id,memcache_charreturn(value));
+}
+void memcache_sseive(int id, long int *value){
+	memcache_sstr("maxseive",id,memcache_charreturn(value));
+}
+
+char* memcache_gpasswd(int id){
+	return memcache_gstr("passwd",id);
+}
+
+void memcache_spasswd(int id,char *value){
+	memcache_sstr("passwd",id,value);
+}
+
+void memcache_clear_buffers(int code){
+	//free(*keybuffer);
+//	free(*keybuffer);
+//	free(*valuesbuffer);
+//	free(*returnbuffer);
+//	free(*bufferelements);
+}
+
+void memcache_allocate_buffers(int size, int code){
+	switch(code){
+	case 0:
+		*key_get_buffer = malloc((size * KEY_SIZE)*(sizeof(*key_get_buffere)));	
+        	if(*key_get_buffer == NULL)
+			fprintf(stderr,"Could not allocate memcache key buffer\n");
+	
+		 //printf("sizeof keybuffer %d - %d - %d - %d\n",sizeof(keybuffer),size,KEY_SIZE,((size * KEY_SIZE)*4));
+
+		*values_get_buffer = malloc((size * VALUE_SIZE)*sizeof(*values_get_buffer));
+		if(*values_get_buffer==NULL)
+			fprintf(stderr,"Could not allocate memcache values buffer\n");
+
+		*return_get_buffer = malloc((size  * VALUE_SIZE)*sizeof(*return_get_buffer));
+		if(*return_get_buffer == NULL)
+			fprintf(stderr,"Could not allocate memcache return buffer\n");
+		break;
+	case 1:
+		*key_set_buffer = malloc((size * KEY_SIZE)*(sizeof(*key_set_buffere)));
+                if(*key_set_buffer == NULL)
+                        fprintf(stderr,"Could not allocate memcache key buffer\n");
+
+                 //printf("sizeof keybuffer %d - %d - %d - %d\n",sizeof(keybuffer),size,KEY_SIZE,((size * KEY_SIZE)*4));
+
+                *values_set_buffer = malloc((size * VALUE_SIZE)*sizeof(*values_set_buffer));
+                if(*values_set_buffer==NULL)
+                        fprintf(stderr,"Could not allocate memcache values buffer\n");
+
+                *return_set_buffer = malloc((size  * VALUE_SIZE)*sizeof(*return_set_buffer));
+                if(*return_set_buffer == NULL)
+                        fprintf(stderr,"Could not allocate memcache return buffer\n");
+                break;
+	}
+//	*bufferelements =(int *)malloc(4*sizeof(int));
+//	*bufferaction = malloc(4*sizeof(*bufferaction));
+}
+
+void memcache_rmlock(){
+
+}
+
+void memcache_set(char * key, char * value){
+	while(pthread_mutex_trylock(&memcache_owner_mutex) != 0)
+		usleep(0);
+
+	int id=startid+1;
+	startid++;
+	buffers_owner=id;
+		
+	pthread_mutex_lock(&memcache_mutex);
+	memcache_allocate_buffers(1,1);
+	bufferelements = 1;
+
+	snprintf(keybuffer[0],KEY_SIZE,"%s",key); 
+	snprintf(valuesbuffer[0],VALUE_SIZE,"%s",value);
+
+	pthread_mutex_unlock(&memcache_mutex);
+	
+	memcache_code=5;
+}
+
+void memcache_setmulti(char * key[], char * value,int id,int size){
+        while(pthread_mutex_trylock(&memcache_set_owner_mutex) != 0)
+                usleep(0);
+
+        int id=startid+1;
+        startid++;
+        buffers_owner=id;
+
+        pthread_mutex_lock(&memcache_set_mutex);
+        memcache_allocate_buffers(1,1);
+
+        buffer_set_elements = 1;
+
+	for(a=0;a<size;a++){
+		snprintf(cid,10,"%d",id);
+		keyname=construct(keyname,cid);
+		snprintf(key_set_buffer[a],KEY_SIZE,"%s",keyname);
+        	snprintf(values_set_buffer[a],VALUE_SIZE,"%s",value);
+	}
+
+        pthread_mutex_unlock(&memcache_set_mutex);
+
+        memcache_code=5;
+}
+
+//ok these two functions need to be consolidated into three functions 2 helpers and then a main with a type setting
+
+char* memcache_get(char * key){
+	while(pthread_mutex_trylock(&memcache_get_owner_mutex) != 0)
+		usleep(1);
+	
+	//setting buffers id so other threads know who the buffer belongs to tho it seems 
+	//irrelavant because the threads dont know the other threads
+	int id=startid+1;
+	startid++;
+	buffers_owner=id;
+
+	pthread_mutex_lock(&memcache_get_mutex);
+	memcache_allocate_buffers(1,0);
+	
+	buffer_get_elements = 1;
+
+	snprintf(key_get_buffer[0],KEY_SIZE,"%s",key);
+	pthread_mutex_unlock(&memcache_get_mutex);
+
+	memcache_get_code=5;
+
+	while(memcache_get_code==5)
+		usleep(1);
+	char * ret;
+	ret=g_new0(char,VALUE_SIZE);
+	snprintf(ret,VALUE_SIZE,"%s",return_get_buffer[0]);
+	memcache_clear_buffers(0);
+	pthread_mutex_unlock(&memcache_get_owner_mutex);
+	return ret;	
+}
+
+char * memcache_getmulti(char *keys[], int id, int size){
+	while(pthread_mutex_trylock(&memcache_get_owner_mutex) != 0)
+		usleep(1);
+	
+	int id=startid++;
+	startid++;
+	bufers_owner=id;
+
+	pthread_mutext_lock(&memcache_get_mutex);
+	memcache_allocate_buffers(size,0);
+
+	buffer_get_elements = size;
+	
+        for(z=0;z<size;z++){
+                sprintf(cid,20,"%d",id);
+                keyname=construct_keyname(keys[z],cid);
+                sprintf(key_get_buffer[z],KEY_SIZE,"%s",keyname);
+        }
+	pthread_mutex_unlock(&memcache_get_mutex);
+
+	memcache_get_code=5;
+	while(memcache_get_code==5)
+		usleep(1);
+
+	char*ret[];
+	*ret=malloc((VALUE_SIZE*size)*sizeof(*ret));
+	for(z=0;z<size;z++){
+		snprint(ret[z],VALUES_SIZE,"%s",return_get_buffer[z]);
+	}
+	
+	memcache_clear_buffers(0);
+	pthread_mutex_unlock(&memcache_get_owner_mutex);
+                return *ret;
+}
+void memcache_process_init(){
+	pthread_t process_get,process_set;
+	
+	pthread_create( &memcache_process_get, NULL, memcache_process_set, NULL );
+	pthread_create( &memcache_process_set, NULL, memcache_process_get, NULL );
+}
+
+void memcache_process_flush(){
+	while(1){
+		usleep(60*60);
+		//flush out old messages that are older than 1 day from memcache
+
+	}
+}
+
+int memcache_process_set(){
+	uint32_t flags;
+	size_t return_length;
+	char *ret;
+	int a;
+
+	ret = g_new0(char, VALUE_SIZE);
+
+	memcached_st * memc = memcached_create(NULL);
+	memcached_server_st *servers = NULL;
+	memcached_return rc;
+
+	servers=memcached_server_list_append(servers,"localhost",11211, &rc);
+	rc= memcached_server_push(memc, servers);
+	while(1){
+		switch(memcache_set_code){
+			case 1:
+				usleep(1);
+				break;
+			case 5:
+				pthread_mutex_lock(&memcache_get_mutex);
+				for(a=0la<buffer_set_elements;a++){
+                                	rc= memcached_set(memc,
+                                        	key_set_buffer[a],
+                                        	strlen(key_set_buffer[a]),
+                                        	values_set_buffer[a],strlen(values_set_buffer[a]),
+                                                 (time_t)0, (uint32_t)0);
+                                        }
+
+                                        if(rc != MEMCACHED_SUCCESS)
+                                                fprintf(stderr,"Error: %s\n",memcached_strerror(memc,rc));
+                                }
+
+                                memcache_set_code=1;
+                                pthread_mutex_unlock(&memcache_set_mutex);
+				pthread_mutex_unlock(&memcache_set_owner_mutex);
+                                break;
+					
+				}
+
+}
+
+int memcache_process_get(){
+        uint32_t flags;
+        size_t return_length;
+        char *ret;
+	int a;
+
+        ret = g_new0(char,VALUE_SIZE);
+
+        memcached_st * memc = memcached_create(NULL);
+        memcached_server_st *servers = NULL;
+        memcached_return rc;
+
+        servers= memcached_server_list_append(servers,"localhost",11211, &rc);
+        rc= memcached_server_push(memc, servers);
+
+//	printf("in thread process\n");
+	
+	while(1){
+		switch(memcache_get_code){
+			case 1: //lock set do sleep
+				usleep(1);
+				break;
+			case 5: //lock cleared process queue
+//				printf("thread process: processing buffer: action-%s elements-%d\n", bufferaction,bufferelements);
+				//g_free(returnbuffer);
+//				*returnbuffer=g_new0(char,VALUE_SIZE);
+				pthread_mutex_lock(&memcache_mutex);
+				for(a=0;a<buffer_get_elements;a++){		        
+						ret = memcached_get(memc,
+        	        	        		key_get_buffer[a], KEY_SIZE,
+                	        			&return_length,
+                        				&flags,
+                        				&rc);
+
+//						printf("thread process: ret:%s\n",ret);
+						snprintf(return_get_buffer[a],VALUE_SIZE,"%s",ret);
+						g_free(ret);
+					
+//						printf("thread process: got value-%s\n", returnbuffer[a]);
+				
+					if(rc != MEMCACHED_SUCCESS)
+                                		fprintf(stderr,"Error: %s\n",memcached_strerror(memc,rc));
+				}
+
+           			//printf("thread process: setting lock.....\n");
+//				memcache_clear_buffers();
+				memcache_get_code=1;
+				pthread_mutex_unlock(&memcache_get_mutex);
+				break;
+		}
+	}
+	memcached_free(memc);
+	return 0;		
+}
+
+/*
+void thread_set(){
+	printf("in thread set\n");
+	char *buffer;
+	char *value;
+	char *id;
+
+	buffer = g_new0(char,1024);
+	value = g_new0(char,1024);
+	id = g_new0(char,1024);
+
+	memcache_lock=1;
+while(1){
+	printf("enter keyname:");
+	scanf("%s",buffer);
+	printf("enter id:");
+	scanf("%s",id);
+	printf("enter value:");
+	scanf("%s",value);
+	if(strcmp(buffer,"x") == 0){
+		memcache_lock = 9;
+		return NULL;
+	}
+	memcache_spasswd(atoi(id),value);
+
+	//gbuffer=g_new0(char,1024);
+	//gbuffer = buffer;
+	//printf("setting global buffer %s\n",gbuffer);
+	memcache_lock = 0;
+}
+}
+void thread_main(){
+pthread_t process,set;
+pthread_create(&process,NULL,thread_process,NULL);
+pthread_create(&set,NULL,thread_set,NULL);
+pthread_join(process,NULL);
+pthread_join(process,NULL);
+
+}
+
+int main(){
+pthread_t pth;
+pthread_create(&pth,NULL, thread_main,NULL);
+pthread_join(pth,NULL);
+
+return 0;
+
+	if(chkmc()){
+	 char *keyencode;
+	 int user_idnr = 10;
+//	printf("%d \n", (10+sizeof(user_idnr)));
+//         snprintf(keyencode,50,"dbmencode_%d",user_idnr);
+//	keyencode=construct_keyname("somekey","postfix");
+	memcache_sid("skraps",10);
+	keyencode = memcache_gid("skraps");
+//	printf("%d\n", keyencode);
+	memcache_spasswd(10,"pasddsfdsfdsf");
+	printf("after setting passwd\n");
+	keyencode = memcache_gpasswd(10);
+	printf("after getting passwd\n");
+	printf("%s\n",keyencode); //memcache_gpasswd(10));
+
+	char *keys[]={"key1","key2","key3","key4"};
+	char *values[]={"value1","value2","value3","value4"};
+        int y = sizeof(keys)/sizeof(int);
+	setmcmulti(keys,values,10,y);
+	getmcmulti(keys,10,y);	
+	int x = 10;
+//	int y = sizeof(keys)/sizeof(int);
+	for (x = 0; x < y; x++){
+			printf("keys: %s\n",keys[x]);
+	}
+//	free(keyencode);
+//	printf("%s \n", keyencode);
+//	printf("%d\n",setmc(keyencode,"some value to cache"));
+//	printf("%s\n",getmc(keyencode,50));
+	}else{
+		printf("MEMCACHE not defined\n");
+	}
+	return 0;
+}
+*/

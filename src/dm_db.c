@@ -1,4 +1,3 @@
-/*  */
 /*
   Copyright (C) 1999-2004 IC & S  dbmail@ic-s.nl
  Copyright (c) 2004-2011 NFG Net Facilities Group BV support@nfg.nl
@@ -3192,34 +3191,23 @@ int db_user_exists(const char *username, u64_t * user_idnr)
 	
 	c = db_con_get();
 	TRY
-                if(chkmc()){
-                        char keyuser[KEY_SIZE];
-                        char *ret;
-			snprintf(keyuser,(8+(strlen(username)+1)),"dbmidnr_%s",username);
-			ret = getmc(keyuser);
-			
-			if(ret != NULL)
-				*user_idnr = atoi(ret);
-			
-			printf("db_user_exists: username %s user_idnr: %d\n", username,*user_idnr);
-			if(*user_idnr == NULL|| *user_idnr == 0){
-				printf("not in memcache\n");
-				s = db_stmt_prepare(c, "SELECT user_idnr FROM %susers WHERE lower(userid) = lower(?)", DBPFX);
-				db_stmt_set_str(s,1,username);
-				r = db_stmt_query(s);
-				if (db_result_next(r)){
-					*user_idnr = db_result_get_u64(r, 0);
-					setmc(keyuser,db_result_get(r,0));
-					printf("user_idnr: %d \n Setting idnr in memcache: %s %d\n", user_idnr,keyuser,*user_idnr);
-				}
-			}
+		if(memcache_check()){
+			*user_idnr=memcache_gid(username);
+			printf("user_idnr: %d\n",*user_idnr);
+			if(*user_idnr==NULL)
+				goto user_exists_db;
 		}else{
+			user_exists_db:
 			s = db_stmt_prepare(c, "SELECT user_idnr FROM %susers WHERE lower(userid) = lower(?)", DBPFX);
                                 db_stmt_set_str(s,1,username);
                                 r = db_stmt_query(s);
                                 if (db_result_next(r))
                                         *user_idnr = db_result_get_u64(r, 0);
-                }	
+			if(memcache_check()){
+				//printf("crash setting key?\n");
+				memcache_sid(username,*user_idnr);
+			}
+		}
 	CATCH(SQLException)
 		LOG_SQLERROR;
 	FINALLY
@@ -3287,6 +3275,15 @@ int db_user_create(const char *username, const char *password, const char *encty
 			db_stmt_set_u64(s, 5, maxmail);
 			db_stmt_set_str(s, 6, encoding);
 		}
+		if(memcache_check()){
+			char *keys[]	=	{"username","password","clientid","maxmail","encoding"};
+			char *values[]	=	{username,password,clientid,maxmail,encoding};
+			int size = 4;
+			
+			memcache_setmulti(keys,values,size,user_idnr);
+
+		}
+
 		g_free(frag);
 		if (_db_params.db_driver == DM_DRIVER_ORACLE) {
 			db_stmt_exec(s);
@@ -3297,23 +3294,6 @@ int db_user_create(const char *username, const char *password, const char *encty
 		}
 		if (*user_idnr == 0) *user_idnr = id;
 		db_commit_transaction(c);
-		if(chkmc()){
-		        char keyuser[KEY_SIZE];
-                        char keypass[KEY_SIZE];
-			char keyencode[KEY_SIZE];
-			snprintf(keyuser,(8+(strlen(username)+1)),"dbmidnr_%s",username);
-			snprintf(keypass,(8+(strlen(password)+1)),"dbmpass_%d", id);
-			snprintf(keyencode,(8+(strlen(encoding)+1)),"dbmencode_%d",encoding);
-			char keys[2]= {keyuser,keypass,keyencode};
-			char idstr[5];
-			sprintf(idstr,"%d",id);
-			char values[2]={idstr,password,encoding};
-			printf("db_user_create: setmcmulti now\n");
-			int i=0;
-			for(i=0;i<3;i++){
-				setmc(keys[i], values[i]);
-			}
-		}
 	CATCH(SQLException)
 		LOG_SQLERROR;
 		db_rollback_transaction(c);
@@ -3331,6 +3311,9 @@ int db_user_create(const char *username, const char *password, const char *encty
 
 int db_change_mailboxsize(u64_t user_idnr, u64_t new_size)
 {
+	if(memcache_check())
+		memcache_smaxmail(new_size,user_idnr);
+
 	return db_update("UPDATE %susers SET maxmail_size = %llu WHERE user_idnr = %llu", DBPFX, new_size, user_idnr);
 }
 

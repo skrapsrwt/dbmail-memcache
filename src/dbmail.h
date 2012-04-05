@@ -96,7 +96,7 @@
 #include <Connection.h>
 #include <ConnectionPool.h>
 #include <SQLException.h>
-#include <libmemcached/memcached.h>
+
 #include "dm_cram.h"
 #include "dm_capa.h"
 #include "dbmailtypes.h"
@@ -141,6 +141,7 @@
 #include <sieve2_error.h>
 #endif
 
+
 #ifdef HAVE_CRYPT_H
 #include <crypt.h>
 #endif
@@ -148,7 +149,7 @@
 #ifdef HAVE_ENDIAN_H
 #include <endian.h>
 #endif
-#define KEY_SIZE 20
+
 #define GETCONFIGVALUE(key, sect, var) \
 	config_get_value(key, sect, var); \
 	if (strlen(var) > 0) \

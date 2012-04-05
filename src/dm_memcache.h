@@ -1,24 +1,29 @@
-/*
-  
- Copyright (c) 2004-2011 NFG Net Facilities Group BV support@nfg.nl
-
- This program is free software; you can redistribute it and/or 
- modify it under the terms of the GNU General Public License 
- as published by the Free Software Foundation; either 
- version 2 of the License, or (at your option) any later 
- version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with this program; if not, write to the Free Software
- Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-*/
-
-extern int setmc(char*key, char*value);
-extern int setmcmulti(char*keys[],char*values[]);
-extern int chkmc();
-extern char*getmc(char * key);
+/* This file was automatically generated.  Do not edit! */
+char *memcache_getmulti(char *keys[],char *values[],int id,int size);
+char *memcache_multi(char *keys[],char *values[],int id,int size,int action);
+void memcache_setmulti(char *keys[],char *values[],int id,int size);
+struct memcache_buffer *memcache_allocate_buffer(int size);
+void memcache_spasswd(int id,char *value);
+char *memcache_gpasswd(int id);
+void memcache_sseive(int id,long int *value);
+void memcache_scurmail(int id,long int value);
+void memcache_sencode(int id,char *value);
+void memcache_smaxmail(int id,long int *value);
+long int *memcache_gmaxseive(int id);
+long int memcache_gcurmail(int id);
+long int memcache_gmaxmail(int id);
+char *memcache_gencode(int id);
+char *memcache_charreturn(long int number);
+int memcache_intreturn(char *string);
+void memcache_sid(char *username,int *id);
+int memcache_gid(char *username);
+void memcache_sint(char *key,int id,char *value);
+int memcache_gint(char *key,char *postfix);
+void memcache_set(char *key,char *value);
+void memcache_sstr(char *key,int id,char *value);
+char *memcache_get(char *key);
+char *memcache_gstr(char *key,int id);
+char *construct_keyname(char *key,char *postfix);
+int memcache_check();
+void memcache_process(void *ptr);
+void memcache_process(void *ptr);

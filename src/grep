@@ -1,0 +1,4 @@
+No command 'error' found, did you mean:
+ Command 'perror' from package 'mysql-cluster-server-5.1' (universe)
+ Command 'perror' from package 'mysql-client-5.1' (main)
+error: command not found

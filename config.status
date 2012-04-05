@@ -449,7 +449,7 @@ Copyright (C) 2010 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/home/skraps/Downloads/dbmail-3.0.2'
+ac_pwd='/home/skraps/projects/dbmail-memcache'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 MKDIR_P='/bin/mkdir -p'
@@ -1916,7 +1916,7 @@ S["MAINTAINER_MODE_FALSE"]=""
 S["MAINTAINER_MODE_TRUE"]="#"
 S["am__untar"]="${AMTAR} xf -"
 S["am__tar"]="${AMTAR} chof - \"$$tardir\""
-S["AMTAR"]="${SHELL} /home/skraps/Downloads/dbmail-3.0.2/config/missing --run tar"
+S["AMTAR"]="${SHELL} /home/skraps/projects/dbmail-memcache/config/missing --run tar"
 S["am__leading_dot"]="."
 S["SET_MAKE"]=""
 S["AWK"]="mawk"
@@ -1924,12 +1924,12 @@ S["mkdir_p"]="/bin/mkdir -p"
 S["MKDIR_P"]="/bin/mkdir -p"
 S["INSTALL_STRIP_PROGRAM"]="$(install_sh) -c -s"
 S["STRIP"]="strip"
-S["install_sh"]="${SHELL} /home/skraps/Downloads/dbmail-3.0.2/config/install-sh"
-S["MAKEINFO"]="${SHELL} /home/skraps/Downloads/dbmail-3.0.2/config/missing --run makeinfo"
-S["AUTOHEADER"]="${SHELL} /home/skraps/Downloads/dbmail-3.0.2/config/missing --run autoheader"
-S["AUTOMAKE"]="${SHELL} /home/skraps/Downloads/dbmail-3.0.2/config/missing --run automake-1.11"
-S["AUTOCONF"]="${SHELL} /home/skraps/Downloads/dbmail-3.0.2/config/missing --run autoconf"
-S["ACLOCAL"]="${SHELL} /home/skraps/Downloads/dbmail-3.0.2/config/missing --run aclocal-1.11"
+S["install_sh"]="${SHELL} /home/skraps/projects/dbmail-memcache/config/install-sh"
+S["MAKEINFO"]="${SHELL} /home/skraps/projects/dbmail-memcache/config/missing --run makeinfo"
+S["AUTOHEADER"]="${SHELL} /home/skraps/projects/dbmail-memcache/config/missing --run autoheader"
+S["AUTOMAKE"]="${SHELL} /home/skraps/projects/dbmail-memcache/config/missing --run automake-1.11"
+S["AUTOCONF"]="${SHELL} /home/skraps/projects/dbmail-memcache/config/missing --run autoconf"
+S["ACLOCAL"]="${SHELL} /home/skraps/projects/dbmail-memcache/config/missing --run aclocal-1.11"
 S["VERSION"]="3.0.2"
 S["PACKAGE"]="dbmail"
 S["CYGPATH_W"]="echo"

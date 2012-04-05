@@ -1251,7 +1251,7 @@ static void insert_physmessage(DbmailMessage *self, C c)
 	}
 }
 
-int _message_insert(DbmailMessage *self, 
+int _message_insert(DbmailMessage *self, ///\/\/\/\/\/\/\/\/\/\/\//\/\/\/\\/\/\///\\\//\/\/\/\\/\/\/\\/\/\\\/ 
 		u64_t user_idnr, 
 		const char *mailbox, 
 		const char *unique_id)

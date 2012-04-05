@@ -1,0 +1,439 @@
+//#include "dbmail.h"
+#include <stdio.h>
+#include <sys/types.h>
+#include <glib.h>
+#include <pthread.h>
+#include <libmemcached/memcached.h>
+#include "dm_memcache.h"
+
+#define MEMCACHE "Y"
+#define MC_SERVER1 "127.0.0.1"
+#define MEMCACHE_PRFX "dbm"
+#define KEY_SIZE 20
+#define MAX_VALUE 1024
+#define VALUE_SIZE 1024
+#define KEY_BUFFER
+//memcached_st * memc = memcached_create(NULL);
+//memcached_server_st *servers = NULL;
+//memcached_return rc;
+char *keybuffer[], *valuebuffer[], *numkeys;
+int *lock;
+
+
+int chkmc(){
+	if(MEMCACHE == "Y" || MEMCACHE == "y" || MEMCACHE == "yes" || MEMCACHE == "YES")
+		return 1;
+	else
+		return 0;
+}
+char* construct_keyname(char *key, char *postfix){
+        char *keyname;
+        keyname = g_new0(char,KEY_SIZE); //allocate memory that is freed inmemcache_gstr and memcache_gid
+
+        snprintf(keyname,
+                KEY_SIZE,
+                "%s%s_%s",
+                MEMCACHE_PRFX,
+                key,
+                postfix);
+
+        return keyname;
+}
+
+char *memcache_gstr(char *key, int id){
+        char *ret, *keyname, keyid[4];
+	ret = g_new0(char,VALUE_SIZE);
+	keyname = g_new0(char,KEY_SIZE);
+	memset(keyid, 0, sizeof(keyid));
+
+        sprintf(keyid,"%d",id);
+        keyname= construct_keyname(key,keyid);
+        printf("key: %s\n", keyname);
+	ret = getmc(keyname);
+        free(keyname);
+        return ret;
+}
+
+void memcache_sstr(char *key, int id,char*value){
+        char keyid[4];
+	memset(keyid, 0, sizeof(keyid));
+
+        sprintf(keyid,"%d",id);
+        key = construct_keyname(key,keyid);
+        printf("sstr: %s,%d,%s\n",key,id,value);
+        setmc(key,value);
+        free(key);
+}
+int memcache_gint(char*key,char*postfix){
+	char *keyuser, *ret;
+        int *ret64u;
+	keyuser = g_new0(char,KEY_SIZE);
+	ret = g_new0(char,VALUE_SIZE);
+	ret64u = g_new0(int,4);
+
+        keyuser = construct_keyname(key,postfix);
+        ret = getmc(keyuser);
+        free(keyuser);
+        if(ret != NULL)
+                ret64u = atoi(ret);
+        return ret64u;
+
+}
+
+void memcache_sint(char*key, int id,char*value){
+//	char *keyuser;
+	//char *value;
+//	value = (char *)malloc(MAX_VALUE*sizeof(char));
+//	sprintf(value,"%d",id);
+//	keyuser = construct_keyname(key,
+}
+
+int *memcache_gid(char*username){
+	char *keyuser, *ret;
+        int *ret64u;
+	keyuser=g_new0(char,KEY_SIZE);
+	ret=g_new0(char,VALUE_SIZE);
+	ret64u=g_new(int,4);
+
+        keyuser = construct_keyname("idnr",username);
+        ret = getmc(keyuser);
+        free(keyuser);
+        if(ret != NULL)
+                ret64u = atoi(ret);
+        return ret64u;
+}
+
+void memcache_sid(char*username, int id){
+	char *keyuser, *value;
+	keyuser=g_new0(char,KEY_SIZE);
+	value=g_new0(char,VALUE_SIZE);
+//	value = (char *)malloc(MAX_VALUE*sizeof(char));
+	sprintf(value,"%d",id);
+	keyuser = construct_keyname("idnr",username);
+	setmc(keyuser,value);
+	free(keyuser);	
+}
+int *memcache_intreturn(char*string){
+	return atoi(string);
+}
+
+char *memcache_charreturn(long int *number){
+	char *buffer;
+	buffer = g_new0(char,VALUE_SIZE);
+	snprintf(buffer,"%d",number);
+	return buffer;
+}
+
+char *memcache_gencode(int id){
+        return memcache_gstr("encode",id);
+}
+long int memcache_gmaxmail(int id){
+	return strtol(memcache_gstr("maxmail",id),NULL,0);
+}
+
+long int memcache_gcurmail(int id){
+	return strtol(memcache_gstr("curmail",id),NULL,0);
+}
+
+long int *memcache_gmaxseive(int id){
+	return strtol(memcache_gstr("maxseive",id),NULL,0);
+}
+
+void memcache_smaxmail(int id, long int *value){
+	memcache_sstr("maxmail",id,memcache_charreturn(value));
+}
+
+void memcache_sencode(int id,char *value){
+        memcache_sstr("encode",id,value);
+}
+void memcache_scurmail(int id, long int *value){
+	memcache_sstr("curmail",id,memcache_charreturn(value));
+}
+void memcache_sseive(int id, long int *value){
+	memcache_sstr("maxseive",id,memcache_charreturn(value));
+}
+
+char* memcache_gpasswd(int id){
+	return memcache_gstr("passwd",id);
+}
+
+void memcache_spasswd(int id,char *value){
+	memcache_sstr("passwd",id,value);
+}
+
+int setmc(char* key, char* value){
+	memcached_st * memc = memcached_create(NULL);
+	memcached_server_st *servers = NULL;
+	memcached_return rc;
+	servers= memcached_server_list_append(servers,"localhost",11211, &rc); 
+	rc= memcached_server_push(memc, servers);
+	rc= memcached_set(memc, key, strlen(key), value,strlen(value), (time_t)0, (uint32_t)0);
+	if(rc != MEMCACHED_SUCCESS){
+		fprintf(stderr,"Couldn't store key: %s\n",memcached_strerror(memc, rc));
+	        memcached_free(memc);
+		return 1;
+	}
+
+        memcached_free(memc);
+	return 0;
+}
+char *getmcmulti(char *keys[], int id, int size){
+	size_t *key_length;
+	size_t return_length;
+	uint32_t flags;
+	char *values[]={"","","","","",""};
+	char *keyname;
+	char cid[5];
+	char ret;
+
+	memcached_st *memc = memcached_create(NULL);
+	memcached_server_st *servers = NULL;
+	memcached_return rc;
+	servers= memcached_server_list_append(servers,"localhost",112211,&rc);
+	rc=memcached_server_push(memc,servers);
+	
+	char return_key[MEMCACHED_MAX_KEY];
+	size_t return_key_length;
+	char *return_value;
+	size_t return_value_length;
+
+	int z;
+
+	sprintf(cid,"%d",id);
+
+	for(z=0;z<size;z++){
+		keyname=construct_keyname(keys[z],cid);
+		printf("getm: %s \n",keyname);
+                ret = memcached_get(memc,keyname, strlen(keyname),&return_length,&flags,&rc);
+		values[z]=ret;
+		printf("inmultiget:%s\n",ret);
+	}
+
+	memcached_free(memc);
+	return ret;
+}
+/*
+void memcache_thread(void *arg){
+        memcached_st * memc = memcached_create(NULL);
+        memcached_server_st *servers = NULL;
+        memcached_return rc;
+        servers= memcached_server_list_append(servers,"localhost",11211, &rc);
+        rc= memcached_server_push(memc, servers);
+        
+	lock=g_set0(int,sizeof(int));
+	lock=0;
+	
+	while(1){
+		switch(lock){
+			case 0: //check queue
+			break;
+			case 1: //process queue and set buffer
+
+			break;
+			case 2: //wait for buffer to be released
+				usleep(1);
+				break;
+		}
+
+		rc= memcached_set(memc, key, strlen(key), value,strlen(value), (time_t)0, (uint32_t)0);
+        	if(rc != MEMCACHED_SUCCESS){
+                	fprintf(stderr,"Couldn't store key: %s\n",memcached_strerror(memc, rc));
+                	memcached_free(memc);
+                	return 1;
+        }
+
+	}
+        memcached_free(memc);
+        return 0;
+}
+*/
+int setmcmulti(char *keys[], char *values[], int id,int size){
+	int z;
+	char *keyname;
+	char cid[10];
+
+	memset(cid,10,sizeof(cid));	
+
+	keyname=g_new0(char,KEY_SIZE);
+	
+	memcached_st * memc = memcached_create(NULL);
+	memcached_server_st *servers = NULL;
+	memcached_return rc;
+	servers= memcached_server_list_append(servers,"localhost",11211,&rc);
+	rc= memcached_server_push(memc, servers);
+	for(z = 0; z < size+1; z++){
+	printf("%s\n",keys[z]);
+		sprintf(cid,"%d",id);
+		keyname = construct_keyname(keys[z],cid);
+		rc=memcached_set(memc,keyname,strlen(keyname),values[z],strlen(values[z]), (time_t)0,(uint32_t)0);
+		if(rc != MEMCACHED_SUCCESS)
+			fprintf(stderr,"Couldn't store key: %s\n", memcached_strerror(memc,rc));
+	}
+//	free(keyname);
+	memcached_free(memc);
+	return 0;
+}
+
+char *getmc(char * key){
+	uint32_t flags;
+	size_t return_length;
+	char *ret;
+
+	ret = g_new0(char,VALUE_SIZE);
+	
+	memcached_st * memc = memcached_create(NULL);
+        memcached_server_st *servers = NULL;
+        memcached_return rc;
+	
+	servers= memcached_server_list_append(servers,"localhost",11211, &rc);
+        rc= memcached_server_push(memc, servers);
+	
+	printf("%s - %d \n", key, sizeof(key));
+	
+	ret = memcached_get(memc, 
+			key, KEY_SIZE,
+			&return_length,
+			&flags,
+			&rc);
+	
+	if(rc != MEMCACHED_SUCCESS){
+		fprintf(stderr,"Couldnt retrieve key: %s - %s\n",key,memcached_strerror(memc,rc));
+		memcached_free(memc);
+		return NULL;
+	}
+	
+	memcached_free(memc);
+	return ret;
+}
+char *keybuffer[], *valuesbuffer[], *returnbuffer[], *bufferaction;
+int glock=1,*bufferelements;
+
+void thread_process(){
+        uint32_t flags;
+        size_t return_length;
+        char *ret;
+	int a;
+
+        ret = g_new0(char,VALUE_SIZE);
+
+        memcached_st * memc = memcached_create(NULL);
+        memcached_server_st *servers = NULL;
+        memcached_return rc;
+
+        servers= memcached_server_list_append(servers,"localhost",11211, &rc);
+        rc= memcached_server_push(memc, servers);
+
+	printf("in thread process\n");
+	
+	while(1){
+		switch(glock){
+			case 1: //lock set do sleep
+				usleep(1);
+				break;
+			case 0: //lock cleared process queue
+				printf("thread process: processing buffer....\n");
+				g_free(returnbuffer);
+				returnbuffer=g_new0(char,VALUE_SIZE);
+
+				for(a=0;a<bufferelements;a++){
+		        	
+					if(strcpm(bufferaction,"get")==0){
+						printf("thread process: performing memcache get request....\n");
+						ret = memcached_get(memc,
+        	        	        		keybuffer[a], KEY_SIZE,
+                	        			&return_length,
+                        				&flags,
+                        				&rc);
+						returnbuffer[a] = ret;
+						g_free(ret);
+					}else{
+						printf("thread process: performing memcache set request.....\n");
+						rc= memcached_set(memc, 
+							keybuffer[a], 
+							strlen(keybuffer[a]), 
+							valuesbuffer[a],strlen(valuesbuffer[a]), 
+							(time_t)0, (uint32_t)0);
+					}
+				
+					if(rc != MEMCACHED_SUCCESS)
+                                		fprintf(stderr,"Couldnt retrieve key: %s - %s\n",key,memcached_strerror(memc,rc));
+				}
+
+           			printf("thread process: setting lock.....\n");
+				glock=1;
+				break;
+		}
+	}
+	memcached_free(memc);
+		
+}
+
+
+void thread_set(){
+	printf("in thread set\n");
+	char *buffer;
+	buffer = g_new0(char,1024);
+	glock=1;
+while(1){
+	scanf("%s",buffer);
+	if(strcmp(buffer,"x") == 0){
+		glock = 9;
+		return NULL;
+	}
+	gbuffer=g_new0(char,1024);
+	gbuffer = buffer;
+	printf("setting global buffer %s\n",gbuffer);
+	glock = 0;
+}
+}
+void thread_main(){
+pthread_t process,set;
+pthread_create(&process,NULL,thread_process,NULL);
+pthread_create(&set,NULL,thread_set,NULL);
+pthread_join(process,NULL);
+pthread_join(process,NULL);
+
+}
+
+int main(){
+pthread_t pth;
+pthread_create(&pth,NULL, thread_main,NULL);
+pthread_join(pth,NULL);
+
+return 0;
+
+	if(chkmc()){
+	 char *keyencode;
+	 int user_idnr = 10;
+//	printf("%d \n", (10+sizeof(user_idnr)));
+//         snprintf(keyencode,50,"dbmencode_%d",user_idnr);
+//	keyencode=construct_keyname("somekey","postfix");
+	memcache_sid("skraps",10);
+	keyencode = memcache_gid("skraps");
+//	printf("%d\n", keyencode);
+	memcache_spasswd(10,"pasddsfdsfdsf");
+	printf("after setting passwd\n");
+	keyencode = memcache_gpasswd(10);
+	printf("after getting passwd\n");
+	printf("%s\n",keyencode); //memcache_gpasswd(10));
+
+	char *keys[]={"key1","key2","key3","key4"};
+	char *values[]={"value1","value2","value3","value4"};
+        int y = sizeof(keys)/sizeof(int);
+	setmcmulti(keys,values,10,y);
+	getmcmulti(keys,10,y);	
+	int x = 10;
+//	int y = sizeof(keys)/sizeof(int);
+	for (x = 0; x < y; x++){
+			printf("keys: %s\n",keys[x]);
+	}
+//	free(keyencode);
+//	printf("%s \n", keyencode);
+//	printf("%d\n",setmc(keyencode,"some value to cache"));
+//	printf("%s\n",getmc(keyencode,50));
+	}else{
+		printf("MEMCACHE not defined\n");
+	}
+	return 0;
+}
+

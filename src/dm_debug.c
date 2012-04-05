@@ -62,7 +62,8 @@ static const char * trace_to_text(trace_t level)
 		"Notice",
 		"Info",
 		"Debug",
-		"Database"
+		"Database",
+		"memcache"
 	};
 	return trace_text[ilogb((double) level)];
 }

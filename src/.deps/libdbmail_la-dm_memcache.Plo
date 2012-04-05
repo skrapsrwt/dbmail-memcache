@@ -260,7 +260,14 @@ libdbmail_la-dm_memcache.lo: dm_memcache.c dbmail.h ../config.h \
  /usr/include/zdb/SQLException.h /usr/include/zdb/Exception.h \
  /usr/include/setjmp.h /usr/include/i386-linux-gnu/bits/setjmp.h \
  /usr/include/i386-linux-gnu/bits/setjmp2.h /usr/include/pthread.h \
- /usr/include/sched.h /usr/include/i386-linux-gnu/bits/sched.h \
+ /usr/include/sched.h /usr/include/i386-linux-gnu/bits/sched.h dm_cram.h \
+ dm_capa.h dbmailtypes.h dm_config.h dm_list.h dm_debug.h dm_dsn.h \
+ dm_acl.h dm_mailboxstate.h dm_misc.h dm_quota.h dm_tls.h dbmail-user.h \
+ dbmail-mailbox.h dbmail-message.h dbmail-imapsession.h dm_cache.h \
+ dm_memblock.h imapcommands.h server.h clientsession.h clientbase.h \
+ lmtp.h dm_db.h dm_sievescript.h auth.h authmodule.h sort.h sortmodule.h \
+ dm_digest.h dm_cidr.h dm_iconv.h dm_getopt.h dm_match.h dm_sset.h \
+ dm_memcache.h /usr/include/crypt.h \
  /usr/local/include/libmemcached/memcached.h \
  /usr/local/include/libmemcached-1.0/memcached.h \
  /usr/local/include/libmemcached-1.0/visibility.h \
@@ -327,14 +334,7 @@ libdbmail_la-dm_memcache.lo: dm_memcache.c dbmail.h ../config.h \
  /usr/local/include/libmemcached-1.0/verbosity.h \
  /usr/local/include/libmemcached-1.0/version.h \
  /usr/local/include/libmemcached-1.0/sasl.h \
- /usr/local/include/libmemcached-1.0/deprecated_types.h dm_cram.h \
- dm_capa.h dbmailtypes.h dm_config.h dm_list.h dm_debug.h dm_dsn.h \
- dm_acl.h dm_mailboxstate.h dm_misc.h dm_quota.h dm_tls.h dbmail-user.h \
- dbmail-mailbox.h dbmail-message.h dbmail-imapsession.h dm_cache.h \
- dm_memblock.h imapcommands.h server.h clientsession.h clientbase.h \
- lmtp.h dm_db.h dm_sievescript.h auth.h authmodule.h sort.h sortmodule.h \
- dm_digest.h dm_cidr.h dm_iconv.h dm_getopt.h dm_match.h dm_sset.h \
- dm_memcache.h /usr/include/crypt.h
+ /usr/local/include/libmemcached-1.0/deprecated_types.h
 
 dbmail.h:
 
@@ -1050,6 +1050,80 @@ dbmail.h:
 
 /usr/include/i386-linux-gnu/bits/sched.h:
 
+dm_cram.h:
+
+dm_capa.h:
+
+dbmailtypes.h:
+
+dm_config.h:
+
+dm_list.h:
+
+dm_debug.h:
+
+dm_dsn.h:
+
+dm_acl.h:
+
+dm_mailboxstate.h:
+
+dm_misc.h:
+
+dm_quota.h:
+
+dm_tls.h:
+
+dbmail-user.h:
+
+dbmail-mailbox.h:
+
+dbmail-message.h:
+
+dbmail-imapsession.h:
+
+dm_cache.h:
+
+dm_memblock.h:
+
+imapcommands.h:
+
+server.h:
+
+clientsession.h:
+
+clientbase.h:
+
+lmtp.h:
+
+dm_db.h:
+
+dm_sievescript.h:
+
+auth.h:
+
+authmodule.h:
+
+sort.h:
+
+sortmodule.h:
+
+dm_digest.h:
+
+dm_cidr.h:
+
+dm_iconv.h:
+
+dm_getopt.h:
+
+dm_match.h:
+
+dm_sset.h:
+
+dm_memcache.h:
+
+/usr/include/crypt.h:
+
 /usr/local/include/libmemcached/memcached.h:
 
 /usr/local/include/libmemcached-1.0/memcached.h:
@@ -1185,77 +1259,3 @@ dbmail.h:
 /usr/local/include/libmemcached-1.0/sasl.h:
 
 /usr/local/include/libmemcached-1.0/deprecated_types.h:
-
-dm_cram.h:
-
-dm_capa.h:
-
-dbmailtypes.h:
-
-dm_config.h:
-
-dm_list.h:
-
-dm_debug.h:
-
-dm_dsn.h:
-
-dm_acl.h:
-
-dm_mailboxstate.h:
-
-dm_misc.h:
-
-dm_quota.h:
-
-dm_tls.h:
-
-dbmail-user.h:
-
-dbmail-mailbox.h:
-
-dbmail-message.h:
-
-dbmail-imapsession.h:
-
-dm_cache.h:
-
-dm_memblock.h:
-
-imapcommands.h:
-
-server.h:
-
-clientsession.h:
-
-clientbase.h:
-
-lmtp.h:
-
-dm_db.h:
-
-dm_sievescript.h:
-
-auth.h:
-
-authmodule.h:
-
-sort.h:
-
-sortmodule.h:
-
-dm_digest.h:
-
-dm_cidr.h:
-
-dm_iconv.h:
-
-dm_getopt.h:
-
-dm_match.h:
-
-dm_sset.h:
-
-dm_memcache.h:
-
-/usr/include/crypt.h:

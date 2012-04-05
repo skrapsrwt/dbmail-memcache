@@ -138,26 +138,9 @@ char *auth_getencryption(u64_t user_idnr)
 	assert(user_idnr > 0);
 	c = db_con_get();
 	TRY
-		if(chkmc()){
-                TRACE(TRACE_DEBUG, "auth_getencryption");
-		        char keyencode[KEY_SIZE];
-			snprintf(keyencode,(10+sizeof(user_idnr)),"dbmencode_%d",user_idnr);
-                        res=getmc(keyencode);
-			if(res == NULL){
-                TRACE(TRACE_DEBUG, "auth_getencryption - doing normal db call");
-				r = db_query(c, "SELECT encryption_type FROM %susers WHERE user_idnr = %11u",DBPFX, user_idnr);
-				if(db_result_next(r)){
-					res = g_strdup(db_result_get(r,0));
-					setmc(keyencode,res);
-					TRACE(TRACE_DEBUG, "auth_getencryption - %s %s", keyencode, res);
-
-				}
-			}
-		}else{
 			r = db_query(c, "SELECT encryption_type FROM %susers WHERE user_idnr = %llu",DBPFX, user_idnr);
 			if (db_result_next(r))
 				res = g_strdup(db_result_get(r,0));
-		}
 	CATCH(SQLException)
 		LOG_SQLERROR;
 	FINALLY
@@ -287,14 +270,6 @@ int auth_change_password(u64_t user_idnr, const char *new_pass, const char *enct
 		db_stmt_set_str(s, 2, enctype?enctype:"");
 		db_stmt_set_u64(s, 3, user_idnr);
 		t = db_stmt_exec(s);
-		if(chkmc()){
-			char keypass[KEY_SIZE];
-			char keyencode[KEY_SIZE];
-			snprintf(keypass,(8+sizeof(user_idnr)),"dbmpass_%d",user_idnr);
-               		snprintf(keyencode,(10+sizeof(user_idnr)),"dbmencode_%d",user_idnr);
-                	setmc(keypass,new_pass);
-                	setmc(keyencode,enctype);
-		}
 	CATCH(SQLException)
 		LOG_SQLERROR;
 		t = DM_EQUERY;
@@ -359,31 +334,6 @@ int auth_validate(clientbase_t *ci, const char *username, const char *password, 
 
 	c = db_con_get();
 	TRY
-		if(chkmc()){
-    				printf("auth validate: checking memcache - useridnr: %d\n",*user_idnr);
-	                    	char keypass[KEY_SIZE];
-				char keyencode[KEY_SIZE];
-
-                        snprintf(keypass,(8+sizeof(user_idnr)),"dbmpass_%d",*user_idnr);
-			snprintf(keyencode,(10+sizeof(user_idnr)),"dbmencode_%d",*user_idnr);
-                        dbpass=getmc(keypass);
-			encode=getmc(keyencode);
-			
-                        if(dbpass == NULL || encode == NULL){
-				printf("response null doing query\n");
-                                r = db_query(c, "SELECT passwd, encryption_type FROM %susers WHERE user_idnr = %11u", DBPFX, *user_idnr);
-                                if(db_result_next(r)){
-                                        dbpass = g_strdup(db_result_get(r,0));
-					encode = g_strdup(db_result_get(r,1));
-                                	setmc(keypass,dbpass);
-					setmc(keyencode,encode);
-					printf("setting memcache pass:%s encode:%s keys: %s %s\n", dbpass,encode,keypass,keyencode);
-
-					t = TRUE;
-				}else
-					t = FALSE;
-                        }
-		}else{
 			r = db_query(c, "SELECT passwd, encryption_type FROM %susers WHERE user_idnr = %llu", DBPFX, *user_idnr);
 			if (db_result_next(r)) {
 				dbpass = g_strdup(db_result_get(r,0));
@@ -392,7 +342,6 @@ int auth_validate(clientbase_t *ci, const char *username, const char *password, 
 			} else {
 				t = FALSE;
 			}
-		}
 	CATCH(SQLException)
 		LOG_SQLERROR;
 		t = DM_EQUERY;
@@ -503,18 +452,7 @@ u64_t auth_md5_validate(clientbase_t *ci UNUSED, char *username,
 
 	c = db_con_get();
 	TRY
-		if(chkmc()){
-                        char key[KEY_SIZE];
-                        char *result;
-			snprintf(key,(10+sizeof(user_idnr)),"dbmpasswd_%d",user_idnr);
-                        result=getmc(key);
-                        if(result==NULL){
-                                r = db_query(c, "SELECT passwd FROM %susers WHERE user_idnr = %11u", DBPFX, user_idnr);
-                                setmc(key,r);
-                        }
-		}else{
 			r = db_query(c, "SELECT passwd FROM %susers WHERE user_idnr = %llu", DBPFX, user_idnr);
-		}
 		if (db_result_next(r)) { /* user found */
 			/* now authenticate using MD5 hash comparisation  */
 			dbpass = db_result_get(r,0); /* value holds the password */
@@ -562,21 +500,9 @@ char *auth_get_userid(u64_t user_idnr)
 	c = db_con_get();
 
 	TRY
-		if(chkmc()){
-			char key[KEY_SIZE];
-			snprintf(key,(7+sizeof(user_idnr)),"dbmuid_%d",user_idnr);
-			result=getmc(key);
-			if(result==NULL){
-				r = db_query(c, "SELECT userid FROM %susers WHERE user_idnr = %11u", DBPFX, user_idnr);
-				if(db_result_next(r))
-					result = g_strdup(db_result_get(r,0));
-				setmc(key,result);
-			}
-		}else{
 			r = db_query(c, "SELECT userid FROM %susers WHERE user_idnr = %llu", DBPFX, user_idnr);
 			if (db_result_next(r))
 				result = g_strdup(db_result_get(r,0));
-		}
 	CATCH(SQLException)
 		LOG_SQLERROR;
 	FINALLY
